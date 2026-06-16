@@ -1,43 +1,19 @@
-# Astro Starter Kit: Minimal
+# open-jp
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Open-jp es una plataforma diseñada para el aprendizaje eficiente de japonés, centrada en la organización del contenido y la práctica activa.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## ¿Qué es?
+Es una aplicación web que ayuda a los estudiantes de japonés a estructurar su estudio mediante Unidades temáticas y Lecciones específicas, permitiendo un seguimiento claro del progreso.
 
-## 🚀 Project Structure
+## Características Principales
+* **Estructura Organizada:** El contenido está dividido en Unidades (ej. Hiragana, Kanji, Verbos) y cada unidad contiene Lecciones específicas.
+* **Práctica Flexible:** Soporta diversos modos de práctica (lectura, escritura, escucha) adaptables a cualquier lección.
+* **Configuración Personalizada:** Puedes definir el número máximo de preguntas por sesión para adaptar la práctica a tu tiempo disponible.
+* **Sistema SRS (Spaced Repetition System):** Utiliza algoritmos de repetición espaciada para asegurar la retención a largo plazo.
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## ¿Cómo funciona?
+1. **Selección:** Desde el tablero principal, eliges la Unidad que deseas estudiar.
+2. **Lección:** Dentro de la unidad, verás las lecciones disponibles.
+3. **Configuración:** Puedes ajustar el número de preguntas que quieres resolver en esa sesión.
+4. **Práctica:** Eliges el modo (ej. lectura, escritura) y comienzas la práctica. La aplicación rastrea tus aciertos y errores.
+5. **Progreso:** Al finalizar, verás un resumen de tu desempeño.

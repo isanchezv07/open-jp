@@ -1,0 +1,25 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import UnitDetail from '../../components/Dashboard/UnitDetail';
+
+export function getStaticPaths() {
+  return [
+    { params: { unit: 'Hiragana' } },
+    { params: { unit: 'Katakana' } },
+    { params: { unit: 'Kanji' } },
+    { params: { unit: 'Vocabulario' } },
+    { params: { unit: 'Verbos' } },
+    { params: { unit: 'Números' } },
+    { params: { unit: 'Tiempo' } },
+    { params: { unit: 'Escucha' } },
+  ];
+}
+
+const { unit } = Astro.params;
+---
+
+<Layout title={`Unidad: ${unit}`}>
+  <main class="py-8">
+    <UnitDetail unitId={unit} client:only="react" />
+  </main>
+</Layout>

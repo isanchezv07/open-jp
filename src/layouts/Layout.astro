@@ -1,0 +1,95 @@
+---
+import { seedDatabase } from '../lib/seed';
+import '../styles/global.css';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Aprende japonés con SRS" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+	</head>
+	<body class="bg-white text-slate-800 font-['Nunito'] min-h-screen flex flex-col">
+    <nav class="border-b-2 border-slate-100 p-4 sticky top-0 bg-white z-50">
+       <div class="max-w-4xl mx-auto flex justify-between items-center">
+          <a href="/" class="text-3xl font-black text-sky-500 tracking-tighter">open-jp</a>
+          <div class="flex gap-6 font-bold text-slate-400">
+             <a href="/" class="hover:text-sky-500 transition-colors">Dashboard</a>
+             <a href="/practice/ja-es" class="hover:text-sky-500 transition-colors">Practicar</a>
+          </div>
+       </div>
+    </nav>
+		<main class="flex-grow">
+			<slot />
+		</main>
+    <Footer />
+    <script>
+      import { seedDatabase } from '../lib/seed';
+      seedDatabase().catch(console.error);
+    </script>
+	</body>
+</html>
+
+<style is:global>
+  :root {
+    --duo-green: #58cc02;
+    --duo-green-border: #46a302;
+    --duo-blue: #1cb0f6;
+    --duo-blue-border: #1899d6;
+    --duo-orange: #ff9600;
+    --duo-orange-border: #e68a00;
+    --duo-red: #ff4b4b;
+    --duo-red-border: #ea2b2b;
+    --duo-gray: #afafaf;
+    --duo-gray-border: #898989;
+  }
+  
+  body {
+    background-color: #ffffff;
+    overflow-x: hidden;
+  }
+
+  /* 3D Button Style */
+  .btn-3d {
+    position: relative;
+    border-bottom: 4px solid var(--border-color);
+    transition: all 0.1s;
+  }
+  .btn-3d:active {
+    border-bottom-width: 0px;
+    transform: translateY(4px);
+  }
+
+  /* Animations */
+  @keyframes bounce-small {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+  .hover-bounce:hover {
+    animation: bounce-small 0.5s infinite;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: #f8fafc; }
+  ::-webkit-scrollbar-thumb { 
+    background: #e2e8f0; 
+    border-radius: 5px; 
+    border: 2px solid #f8fafc;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: #cbd5e1; }
+</style>
