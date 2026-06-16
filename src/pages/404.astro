@@ -1,0 +1,44 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Home, Search } from 'lucide-react';
+---
+
+<Layout title="404 - Página no encontrada">
+  <main class="min-h-[80vh] flex items-center justify-center px-6">
+    <div class="max-w-md w-full text-center space-y-8">
+      <div class="relative inline-block">
+        <div class="absolute inset-0 bg-sky-100 rounded-full blur-3xl opacity-60 animate-pulse"></div>
+        <div class="relative text-9xl font-black text-sky-500 tracking-tighter">
+          404
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        <h1 class="text-4xl font-black text-slate-800 tracking-tight">¡Perdido en la traducción!</h1>
+        <p class="text-slate-400 font-bold text-lg leading-relaxed">
+          Parece que esta página no existe en nuestro diccionario. No te preocupes, ¡hasta los mejores estudiantes se pierden!
+        </p>
+      </div>
+
+      <div class="pt-4 flex flex-col gap-4">
+        <a 
+          href="/" 
+          class="bg-sky-500 text-white py-5 rounded-[2rem] font-black text-xl flex items-center justify-center gap-3 transition-all hover:bg-sky-600 active:translate-y-1 shadow-[0_6px_0_0_#0369a1]"
+        >
+          <Home size={24} strokeWidth={3} />
+          VOLVER AL INICIO
+        </a>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  a {
+    box-shadow: 0 6px 0 0 #0369a1;
+  }
+  a:active {
+    box-shadow: 0 2px 0 0 #0369a1;
+    transform: translateY(4px);
+  }
+</style>

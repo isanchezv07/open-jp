@@ -48,9 +48,9 @@ const db = new Dexie('JapaneseVocabDB') as Dexie & {
 };
 
 // Schema definition
-db.version(1).stores({
+db.version(2).stores({
   lessons: '++id, unit, order',
-  words: '++id, unit, lessonId, kanji, reading, jlpt',
+  words: '++id, unit, lessonId, category, kanji, reading, jlpt',
   progress: 'word_id, next_review, ease',
   userStats: 'id'
 });

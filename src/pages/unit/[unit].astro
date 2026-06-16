@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import UnitDetail from '../../components/Dashboard/UnitDetail';
+import SentencesDetail from '../../components/Dashboard/SentencesDetail';
 
 export function getStaticPaths() {
   return [
@@ -11,6 +12,7 @@ export function getStaticPaths() {
     { params: { unit: 'Verbos' } },
     { params: { unit: 'Números' } },
     { params: { unit: 'Tiempo' } },
+    { params: { unit: 'Oraciones' } },
     { params: { unit: 'Escucha' } },
   ];
 }
@@ -20,6 +22,10 @@ const { unit } = Astro.params;
 
 <Layout title={`Unidad: ${unit}`}>
   <main class="py-8">
-    <UnitDetail unitId={unit} client:only="react" />
+    {unit === 'Oraciones' ? (
+      <SentencesDetail client:only="react" />
+    ) : (
+      <UnitDetail unitId={unit} client:only="react" />
+    )}
   </main>
 </Layout>

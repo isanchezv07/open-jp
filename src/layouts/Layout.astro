@@ -1,7 +1,7 @@
 ---
-import { seedDatabase } from '../lib/seed';
+import { seedDatabase } from '../lib/db/seed';
 import '../styles/global.css';
-import Footer from '../components/Footer.astro';
+import Footer from '../components/Common/Footer.astro';
 
 interface Props {
 	title: string;
@@ -25,20 +25,29 @@ const { title } = Astro.props;
 	</head>
 	<body class="bg-white text-slate-800 font-['Nunito'] min-h-screen flex flex-col">
     <nav class="border-b-2 border-slate-100 p-4 sticky top-0 bg-white z-50">
-       <div class="max-w-4xl mx-auto flex justify-between items-center">
-          <a href="/" class="text-3xl font-black text-sky-500 tracking-tighter">open-jp</a>
-          <div class="flex gap-6 font-bold text-slate-400">
-             <a href="/" class="hover:text-sky-500 transition-colors">Dashboard</a>
-             <a href="/practice/ja-es" class="hover:text-sky-500 transition-colors">Practicar</a>
-          </div>
-       </div>
+      <div class="max-w-4xl mx-auto flex justify-between items-center">
+        <a href="/" class="text-3xl font-black text-sky-500 tracking-tighter">
+          open-jp
+        </a>
+      
+        <div class="flex gap-6 font-bold text-slate-400">
+          <a
+            href="https://github.com/isanchezv07/open-jp"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:text-sky-500 transition-colors"
+          >
+            GitHub
+          </a>
+        </div>
+      </div>
     </nav>
 		<main class="flex-grow">
 			<slot />
 		</main>
     <Footer />
     <script>
-      import { seedDatabase } from '../lib/seed';
+      import { seedDatabase } from '../lib/db/seed';
       seedDatabase().catch(console.error);
     </script>
 	</body>

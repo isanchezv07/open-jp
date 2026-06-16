@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { db, type Word, type Progress, type UserStats } from '../../lib/db';
+import { db, type Word, type Progress, type UserStats } from '../../lib/db/index';
 import { Trophy, Flame, BookOpen, Star, ChevronRight, Volume2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -36,16 +36,20 @@ export default function Dashboard() {
   }, [filter]);
 
   const loadWords = async () => {
-    let query: any = db.words;
-    if (filter.jlpt > 0) query = query.where('jlpt').equals(filter.jlpt);
-    if (filter.category) {
-      // If we already have a collection from jlpt filter, we filter manually as Dexie doesn't support multiple where easily without composite indexes
-      const results = filter.jlpt > 0 ? await query.toArray() : await db.words.toArray();
-      setWords(results.filter(w => w.category === filter.category).slice(0, 50));
+    let results = [];
+    if (filter.jlpt > 0) {
+      results = await db.words.where('jlpt').equals(filter.jlpt).toArray();
     } else {
-      const results = await query.toArray();
-      setWords(results.slice(0, 50));
+      results = await db.words.toArray();
     }
+
+    if (filter.category) {
+      results = results.filter(w => w.category === filter.category);
+    }
+
+    // Shuffle and limit to 50
+    const shuffled = results.sort(() => Math.random() - 0.5);
+    setWords(shuffled.slice(0, 50));
   };
 
   const categories = ['idiomas', 'naturaleza', 'animales', 'comida', 'escuela', 'familia', 'tiempo', 'números', 'adjetivos', 'verbos'];

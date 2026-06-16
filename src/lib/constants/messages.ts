@@ -1,0 +1,122 @@
+export const performanceMessages = {
+  perfect: [
+    { text: "¡Perfección total!", subtext: "No has cometido ni un solo error. ¡Eres increíble!" },
+    { text: "¡Nivel Maestro!", subtext: "100% de precisión. Tu esfuerzo está dando frutos." },
+    { text: "¡Impecable!", subtext: "Has dominado cada palabra de esta lección." },
+    { text: "¡Legendario!", subtext: "Una actuación perfecta digna de admiración." },
+    { text: "¡Invencible!", subtext: "Nada se interpone entre tú y el japonés." },
+    { text: "¡Dominio absoluto!", subtext: "Has demostrado un control excepcional." },
+    { text: "¡Resultado perfecto!", subtext: "Cada respuesta fue exactamente correcta." },
+    { text: "¡Genio del japonés!", subtext: "Tu comprensión es impresionante." },
+    { text: "¡Clase magistral!", subtext: "Acabas de dar una demostración impecable." },
+    { text: "¡Más allá del 100%!", subtext: "Tu rendimiento fue extraordinario." },
+    { text: "¡Shōgun del japonés!", subtext: "Has conquistado esta lección sin esfuerzo." },
+    { text: "¡Inigualable!", subtext: "Tu nivel está alcanzando nuevas alturas." },
+    { text: "¡Progreso perfecto!", subtext: "Cada práctica fortalece tu conocimiento." },
+    { text: "¡Sin fisuras!", subtext: "No hubo errores en toda la sesión." },
+    { text: "¡Qué talento!", subtext: "Tu dedicación se refleja en cada respuesta." },
+    { text: "¡Maestro Supremo!", subtext: "Has completado esta lección de forma impecable." },
+    { text: "¡Puntuación máxima!", subtext: "No se puede hacer mejor que esto." },
+    { text: "¡Excelencia absoluta!", subtext: "Has alcanzado el nivel más alto posible." },
+    { text: "¡Increíble precisión!", subtext: "Cada respuesta estuvo en su lugar." },
+    { text: "¡Fenomenal!", subtext: "Has arrasado con esta lección." }
+  ],
+
+  great: [
+    { text: "¡Casi perfecto!", subtext: "Tu precisión es impresionante, ¡sigue así!" },
+    { text: "¡Excelente trabajo!", subtext: "Estás muy cerca de la perfección absoluta." },
+    { text: "¡Qué gran nivel!", subtext: "Has demostrado un dominio excepcional hoy." },
+    { text: "¡Sobresaliente!", subtext: "Tu desempeño fue realmente notable." },
+    { text: "¡Magnífico!", subtext: "Has completado la lección con gran precisión." },
+    { text: "¡Qué habilidad!", subtext: "Se nota todo el tiempo que has practicado." },
+    { text: "¡Espectacular!", subtext: "Solo unos pocos detalles te separan del 100%." },
+    { text: "¡Gran rendimiento!", subtext: "Vas por un camino excelente." },
+    { text: "¡Impresionante!", subtext: "Tu nivel sigue mejorando constantemente." },
+    { text: "¡Fantástico!", subtext: "Has logrado un resultado sobresaliente." },
+    { text: "¡Muy cerca!", subtext: "La perfección está al alcance de tu mano." },
+    { text: "¡Extraordinario!", subtext: "Tu progreso es evidente en cada sesión." },
+    { text: "¡Excelente precisión!", subtext: "Has respondido con mucha seguridad." },
+    { text: "¡Un trabajo brillante!", subtext: "Sigue así y dominarás esta unidad." },
+    { text: "¡Qué progreso!", subtext: "Cada práctica te hace más fuerte." }
+  ],
+
+  good: [
+    { text: "¡Buen trabajo!", subtext: "Has superado la lección con éxito. ¡A por más!" },
+    { text: "¡Sigue progresando!", subtext: "Cada acierto te acerca más a tu meta." },
+    { text: "¡Muy bien hecho!", subtext: "Estás construyendo una base muy sólida." },
+    { text: "¡Buen avance!", subtext: "Tu esfuerzo está dando resultados." },
+    { text: "¡Lo estás logrando!", subtext: "Cada sesión te hace mejorar." },
+    { text: "¡Gran esfuerzo!", subtext: "La constancia es la clave del éxito." },
+    { text: "¡Buen ritmo!", subtext: "Mantén esta energía y seguirás creciendo." },
+    { text: "¡Sigue adelante!", subtext: "Estás avanzando paso a paso." },
+    { text: "¡Progreso constante!", subtext: "Cada palabra aprendida cuenta." },
+    { text: "¡Nada mal!", subtext: "Vas por muy buen camino." },
+    { text: "¡Buen resultado!", subtext: "Has completado la lección con éxito." },
+    { text: "¡Vas mejorando!", subtext: "Tu conocimiento sigue creciendo." },
+    { text: "¡Buen desempeño!", subtext: "La práctica está funcionando." },
+    { text: "¡Más fuerte que ayer!", subtext: "Cada día sabes un poco más." },
+    { text: "¡Sigue construyendo!", subtext: "Una base sólida lleva a la fluidez." }
+  ],
+
+  keepTrying: [
+    { text: "¡No te rindas!", subtext: "La práctica hace al maestro. ¡Vuelve a intentarlo!" },
+    { text: "¡Buen esfuerzo!", subtext: "Repasar es la clave para memorizar mejor." },
+    { text: "¡Sigue practicando!", subtext: "Cada error es una oportunidad para aprender algo nuevo." },
+    { text: "¡Tú puedes!", subtext: "Todo experto fue principiante alguna vez." },
+    { text: "¡Ánimo!", subtext: "Los errores forman parte del aprendizaje." },
+    { text: "¡No pares ahora!", subtext: "Estás más cerca de lo que crees." },
+    { text: "¡Sigue intentándolo!", subtext: "La repetición construye memoria." },
+    { text: "¡Aprender lleva tiempo!", subtext: "Lo importante es continuar avanzando." },
+    { text: "¡Confía en el proceso!", subtext: "Cada práctica suma experiencia." },
+    { text: "¡Vuelve a intentarlo!", subtext: "La siguiente vez te irá mejor." },
+    { text: "¡No pasa nada!", subtext: "Los errores también enseñan." },
+    { text: "¡Sigue adelante!", subtext: "Tu progreso no se detiene." },
+    { text: "¡Un paso a la vez!", subtext: "La fluidez se construye poco a poco." },
+    { text: "¡Persistencia!", subtext: "La constancia supera al talento." },
+    { text: "¡Lo conseguirás!", subtext: "Continúa practicando y notarás la diferencia." }
+  ],
+
+  streak: [
+    { text: "¡Racha imparable!", subtext: "Has practicado varios días seguidos. ¡No pares!" },
+    { text: "¡Fuego en tus manos!", subtext: "Tu racha está creciendo. ¡Mantén la llama viva!" },
+    { text: "¡Constancia legendaria!", subtext: "Tu disciplina merece reconocimiento." },
+    { text: "¡Día tras día!", subtext: "La práctica diaria marca la diferencia." },
+    { text: "¡Sigues encendido!", subtext: "Tu motivación es contagiosa." },
+    { text: "¡Racha de acero!", subtext: "Nada ha logrado detenerte." },
+    { text: "¡Compromiso total!", subtext: "Cada día cuenta y tú lo sabes." },
+    { text: "¡Imparable!", subtext: "Tu progreso se acelera gracias a la constancia." },
+    { text: "¡No rompas la cadena!", subtext: "Has llegado demasiado lejos para parar." },
+    { text: "¡La llama sigue viva!", subtext: "Tu hábito de estudio es admirable." }
+  ],
+
+  levelUp: [
+    { text: "¡Siguiente Nivel!", subtext: "Has subido de nivel. ¡Tu japonés está evolucionando!" },
+    { text: "¡Subida de Rango!", subtext: "Nuevos desafíos te esperan. ¡Felicidades!" },
+    { text: "¡Nivel Desbloqueado!", subtext: "Tu esfuerzo acaba de ser recompensado." },
+    { text: "¡Más fuerte que nunca!", subtext: "Has alcanzado un nuevo nivel." },
+    { text: "¡Ascenso logrado!", subtext: "Tu aventura apenas comienza." },
+    { text: "¡Experto en progreso!", subtext: "Cada nivel demuestra tu crecimiento." },
+    { text: "¡Nuevo rango obtenido!", subtext: "Has demostrado que estás listo para más." },
+    { text: "¡Sigue escalando!", subtext: "Todavía hay muchas metas por alcanzar." },
+    { text: "¡Poder desbloqueado!", subtext: "Tu conocimiento sigue expandiéndose." },
+    { text: "¡Nivel completado!", subtext: "Es hora de afrontar nuevos retos." }
+  ],
+
+  lessonComplete: [
+    { text: "¡Lección Finalizada!", subtext: "Has completado todo el contenido de esta unidad." },
+    { text: "¡Objetivo Cumplido!", subtext: "Has terminado la lección programada para hoy." },
+    { text: "¡Unidad completada!", subtext: "Otro gran paso en tu aprendizaje." },
+    { text: "¡Trabajo terminado!", subtext: "Has superado todos los desafíos de esta lección." },
+    { text: "¡Meta alcanzada!", subtext: "Tu esfuerzo ha dado resultado." },
+    { text: "¡Lección conquistada!", subtext: "Nada pudo detenerte hoy." },
+    { text: "¡Excelente sesión!", subtext: "Has aprovechado muy bien tu tiempo." },
+    { text: "¡Contenido dominado!", subtext: "Ya puedes continuar con confianza." },
+    { text: "¡Victoria obtenida!", subtext: "Una lección más cerca de la fluidez." },
+    { text: "¡Misión completada!", subtext: "Prepárate para el siguiente desafío." },
+    { text: "¡Capítulo cerrado!", subtext: "Es momento de avanzar al siguiente nivel." },
+    { text: "¡Otro logro desbloqueado!", subtext: "Tu progreso sigue creciendo." },
+    { text: "¡Fin de la lección!", subtext: "Has hecho un trabajo fantástico." },
+    { text: "¡Todo completado!", subtext: "No has dejado nada pendiente." },
+    { text: "¡Lección superada!", subtext: "Tu japonés es mejor que ayer." }
+  ]
+};
