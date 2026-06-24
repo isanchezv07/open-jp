@@ -97,9 +97,10 @@ export const sentenceExercises: SentenceExercise[] = [
     lessonId: 104,
     category: 'Verificación Visual',
     type: 'image_binary',
-    japanese: 'これは りんご です',
-    translation: 'Esto es una manzana',
-    imageUrl: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=500&q=80',
+    japanese: 'これは ねこ です',
+    translation: 'Esto es un gato',
+    imageUrls: ['https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgh9T8iIULZyWTH12dBhJiLlqWJ5jHe9DVdEZ72cJJuA7ru5B5lpJew5VvqmbF_KbYdxABcMxh9YcNr7vUL3CRZpW75EMkPGjowjOaK8R7ivS0eJje_nYNTB2H2eBZTIGf5jsz3MtBHPWo/s400/pet_cat_kedukuroi.png', 
+                'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjAeGNeOpV8DhSfyIY29t8yrzJZGO_rzNrBBQwlot4jtJ8Fuyy-eIfxLQ1ojuqg4RyFlurEH0fdu0P_JdHcIgvOx1vbast3ml7JDxlC2snHadlbZVyrHLM8mamGwAP3E86Y7KAT_VSnv8lj/s400/sleep_animal_cat.png'],
     isTrue: true,
     difficulty: 'easy'
   },
@@ -110,8 +111,9 @@ export const sentenceExercises: SentenceExercise[] = [
     type: 'image_binary',
     japanese: 'これは いぬ です',
     translation: 'Esto es un perro',
-    imageUrl: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=500&q=80', // Cat image
-    isTrue: false,
+    imageUrls: ['https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhG4xpQ_FMBOIdN_junRODMG3TxJw1q5hSm_OVtAJkeI_qS2JBSQbHltv1SE46v-zagGxHe6aKvzbkziOE7LeInDS7UIIhwUfcCBYnmFhJe6dNjM4Jribry1PoJagMXmVhOsR7ESGt-0l9G/s400/dog_akitainu.png', 
+                'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiY4WaJ3gVgvAsbaKh-_dNrS4-bhxxQT_qRuO4GR2AG6OFYpcdC1lQBHXI6Hx0SaP5vnlZwpm1NZfuDuuV1wMZC6eEn1r7S6nEZsZ1ZsWEygcw_dazTC2zlDb1Di1YMv-KDdYf5XtwH-ITU/s400/dog_hoeru_kyouken.png'],
+    isTrue: true,
     difficulty: 'easy'
   }
 ];

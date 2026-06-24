@@ -1,18 +1,40 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, X } from 'lucide-react';
+import { Check, X, Loader2 } from 'lucide-react';
 import type { SentenceExercise } from '../../lib/types/index';
 
 interface ImageBinaryPracticeProps {
   exercise: SentenceExercise;
-  onComplete: (isCorrect: boolean) => void;
 }
 
 export default function ImageBinaryPractice({ exercise, onComplete }: ImageBinaryPracticeProps) {
   const [status, setStatus] = useState<'idle' | 'correct' | 'incorrect'>('idle');
+  const [selectedAnswer, setSelectedAnswer] = useState<boolean | null>(null);
+  const [fetchedImageUrl, setFetchedImageUrl] = useState<string | null>(null);
+  const [isLoadingImage, setIsLoadingImage] = useState(false);
+
+  useEffect(() => {
+    // Reset state when exercise changes
+    setStatus('idle');
+    setSelectedAnswer(null);
+    
+    // Pick a random image from the imageUrls array if available
+    if (exercise.imageUrls && exercise.imageUrls.length > 0) {
+      const randomIndex = Math.floor(Math.random() * exercise.imageUrls.length);
+      setFetchedImageUrl(exercise.imageUrls[randomIndex]);
+    } else if (exercise.imageUrl) {
+      // Fallback for older data format
+      setFetchedImageUrl(exercise.imageUrl);
+    } else {
+      setFetchedImageUrl('https://images.unsplash.com/photo-1531686264889-56fdcabd163f?w=500&q=80');
+    }
+    setIsLoadingImage(false);
+  }, [exercise]);
 
   const checkAnswer = (userAnswer: boolean) => {
     if (status !== 'idle') return;
+    
+    setSelectedAnswer(userAnswer);
 
     if (userAnswer === exercise.isTrue) {
       setStatus('correct');
@@ -31,6 +53,7 @@ export default function ImageBinaryPractice({ exercise, onComplete }: ImageBinar
       }
       setTimeout(() => {
         setStatus('idle');
+        setSelectedAnswer(null);
       }, 1500);
     }
   };
@@ -45,12 +68,21 @@ export default function ImageBinaryPractice({ exercise, onComplete }: ImageBinar
         <p className="text-slate-500 font-bold text-lg">{exercise.translation}</p>
       </div>
 
-      <div className="relative rounded-[2rem] overflow-hidden border-4 border-slate-100 shadow-sm group">
-        <img 
-          src={exercise.imageUrl} 
-          alt="Visual check" 
-          className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
-        />
+      <div className="">
+        {isLoadingImage ? (
+          <div className="flex flex-col items-center gap-3 text-slate-400">
+            <Loader2 className="animate-spin" size={32} />
+            <span className="font-bold text-sm tracking-widest uppercase">Buscando ilustración...</span>
+          </div>
+        ) : (
+          fetchedImageUrl && (
+            <img 
+              src={fetchedImageUrl} 
+              alt="Visual check" 
+              className="w-full h-64 object-contain p-4 transition-transform duration-500 group-hover:scale-105"
+            />
+          )
+        )}
         <div className="absolute inset-0 border-4 border-black/5 rounded-[2rem] pointer-events-none"></div>
       </div>
 
@@ -59,13 +91,15 @@ export default function ImageBinaryPractice({ exercise, onComplete }: ImageBinar
           onClick={() => checkAnswer(true)}
           disabled={status !== 'idle'}
           className={`flex-1 py-5 rounded-[1.5rem] font-black text-xl transition-all btn-3d ${
-            status === 'correct' && exercise.isTrue
+            selectedAnswer === true
+              ? status === 'correct'
+                ? 'bg-green-500 text-white'
+                : 'bg-slate-300 text-white'
+              : selectedAnswer === false && status === 'incorrect' && exercise.isTrue
               ? 'bg-green-500 text-white'
-              : status === 'incorrect' && exercise.isTrue
-              ? 'bg-red-500 text-white'
               : 'bg-green-100 text-green-700 hover:bg-green-500 hover:text-white'
           } disabled:opacity-50`}
-          style={{ '--border-color': 'var(--duo-green-border)' } as any}
+          style={{ '--border-color': selectedAnswer === true ? (status === 'correct' ? 'var(--duo-green-border)' : '#94a3b8') : 'var(--duo-green-border)' } as any}
         >
           <div className="flex items-center justify-center gap-2">
             <Check size={24} strokeWidth={3} />
@@ -77,13 +111,15 @@ export default function ImageBinaryPractice({ exercise, onComplete }: ImageBinar
           onClick={() => checkAnswer(false)}
           disabled={status !== 'idle'}
           className={`flex-1 py-5 rounded-[1.5rem] font-black text-xl transition-all btn-3d ${
-            status === 'correct' && !exercise.isTrue
-              ? 'bg-green-500 text-white'
-              : status === 'incorrect' && !exercise.isTrue
-              ? 'bg-red-500 text-white'
+            selectedAnswer === false
+              ? status === 'correct'
+                ? 'bg-rose-500 text-white'
+                : 'bg-slate-300 text-white'
+              : selectedAnswer === true && status === 'incorrect' && !exercise.isTrue
+              ? 'bg-rose-500 text-white'
               : 'bg-rose-100 text-rose-700 hover:bg-rose-500 hover:text-white'
           } disabled:opacity-50`}
-          style={{ '--border-color': '#be123c' } as any}
+          style={{ '--border-color': selectedAnswer === false ? (status === 'correct' ? '#9f1239' : '#94a3b8') : '#be123c' } as any}
         >
           <div className="flex items-center justify-center gap-2">
             <X size={24} strokeWidth={3} />

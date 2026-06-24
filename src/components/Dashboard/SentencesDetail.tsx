@@ -44,8 +44,15 @@ export default function SentencesDetail() {
 
     if (catExercises.length === 0) return;
 
-    const shuffled = [...catExercises].sort(() => Math.random() - 0.5);
-    const set = shuffled.slice(0, Math.min(questionLimit, shuffled.length));
+    const set = [];
+    let currentShuffled = [...catExercises].sort(() => Math.random() - 0.5);
+    
+    while(set.length < questionLimit) {
+      if (currentShuffled.length === 0) {
+        currentShuffled = [...catExercises].sort(() => Math.random() - 0.5);
+      }
+      set.push(currentShuffled.pop()!);
+    }
     
     setPracticeSet(set);
     setCurrentIndex(0);
@@ -113,7 +120,7 @@ export default function SentencesDetail() {
 
         <AnimatePresence mode="wait">
           <motion.div
-            key={currentExercise.id}
+            key={`${currentExercise.id}-${currentIndex}`}
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}

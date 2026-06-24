@@ -36,7 +36,7 @@ export interface SentenceExercise {
   spanishDistractors?: string[]; // Extra Spanish words to make it harder
   
   // image_binary props
-  imageUrl?: string;
+  imageUrls?: string[];
   isTrue?: boolean;
   
   difficulty?: 'easy' | 'medium' | 'hard';
