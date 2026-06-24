@@ -91,5 +91,27 @@ export const sentenceExercises: SentenceExercise[] = [
     spanishWords: ['Bebo', 'agua'],
     spanishDistractors: ['como', 'arroz'],
     difficulty: 'medium'
+  },
+  {
+    id: 'sentence-img-001',
+    lessonId: 104,
+    category: 'Verificación Visual',
+    type: 'image_binary',
+    japanese: 'これは りんご です',
+    translation: 'Esto es una manzana',
+    imageUrl: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=500&q=80',
+    isTrue: true,
+    difficulty: 'easy'
+  },
+  {
+    id: 'sentence-img-002',
+    lessonId: 104,
+    category: 'Verificación Visual',
+    type: 'image_binary',
+    japanese: 'これは いぬ です',
+    translation: 'Esto es un perro',
+    imageUrl: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=500&q=80', // Cat image
+    isTrue: false,
+    difficulty: 'easy'
   }
 ];

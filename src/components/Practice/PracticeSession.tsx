@@ -48,6 +48,12 @@ export default function PracticeSession({ mode }: PracticeSessionProps) {
       wordsPool = await db.words.toArray();
     }
 
+    const idsParam = urlParams.get('ids');
+    if (idsParam) {
+      const ids = idsParam.split(',').map(Number);
+      wordsPool = wordsPool.filter(w => w.id && ids.includes(w.id));
+    }
+
     if (wordsPool.length === 0) {
       wordsPool = await db.words.limit(50).toArray();
     }
@@ -123,11 +129,14 @@ export default function PracticeSession({ mode }: PracticeSessionProps) {
     if (!currentWord || isRevealed) return;
 
     let correct = false;
-    const input = userInput.trim().toLowerCase();
+    const normalize = (str: string) => str.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    const input = normalize(userInput);
 
     if (mode === 'es-ja') {
       const isLetter = currentWord.category === 'letras';
-      correct = isLetter ? input === currentWord.kanji : (input === currentWord.kanji || input === currentWord.reading);
+      correct = isLetter 
+        ? input === normalize(currentWord.kanji) 
+        : (input === normalize(currentWord.kanji) || input === normalize(currentWord.reading));
     } else {
       correct = validateAnswer(userInput, currentWord.meanings);
     }

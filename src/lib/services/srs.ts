@@ -34,6 +34,9 @@ export function calculateNextReview(quality: number, currentProgress?: Progress)
 }
 
 export function validateAnswer(input: string, correctMeanings: string[]): boolean {
-  const normalizedInput = input.trim().toLowerCase();
-  return correctMeanings.some(m => m.toLowerCase() === normalizedInput);
+  const normalize = (str: string) => 
+    str.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+  const normalizedInput = normalize(input);
+  return correctMeanings.some(m => normalize(m) === normalizedInput);
 }

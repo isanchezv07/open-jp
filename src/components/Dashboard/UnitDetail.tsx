@@ -10,6 +10,15 @@ interface UnitDetailProps {
 export default function UnitDetail({ unitId }: UnitDetailProps) {
   const [questionLimit, setQuestionLimit] = useState(10);
 
+  const [selectedItems, setSelectedItems] = useState<Set<number>>(new Set());
+
+  const toggleSelection = (id: number) => {
+    const next = new Set(selectedItems);
+    if (next.has(id)) next.delete(id);
+    else next.add(id);
+    setSelectedItems(next);
+  };
+
   const { unitLessons, wordsByLesson, stats } = useMemo(() => {
     const lessons = allLessons
       .filter((l) => l.unit === unitId)
@@ -55,7 +64,7 @@ export default function UnitDetail({ unitId }: UnitDetailProps) {
                 Unidad: {unitId}
               </h1>
               <p className="text-slate-400 font-bold mt-1">
-                {stats.total} palabras en esta unidad
+                {stats.total} palabras en esta unidad. Selecciona las que desees para practicar.
               </p>
             </div>
 
@@ -98,69 +107,92 @@ export default function UnitDetail({ unitId }: UnitDetailProps) {
 
         {/* Lessons */}
         <div className="space-y-10">
-          {unitLessons.map((lesson, index) => (
-            <motion.section
-              key={lesson.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className="bg-white rounded-[2.5rem] border-2 border-slate-200 shadow-sm p-8"
-            >
-              <div className="flex items-center gap-4 mb-8">
-                <div className="w-2 h-10 rounded-full bg-sky-500" />
-                <h2 className="text-3xl font-black text-slate-800">
-                  {lesson.title}
-                </h2>
-              </div>
+          {unitLessons.map((lesson, index) => {
+            const lessonWords = wordsByLesson[lesson.id] || [];
+            const selectedInLesson = lessonWords.filter(w => selectedItems.has(w.id!)).map(w => w.id);
+            const queryIds = selectedInLesson.length > 0 ? `&ids=${selectedInLesson.join(',')}` : '';
 
-              <div className="grid md:grid-cols-2 gap-6 mb-10">
-                <a
-                  href={`/practice/${unitId === 'Escucha' ? 'audio' : 'ja-es'}?lessonId=${lesson.id}&limit=${questionLimit}`}
-                  className="group bg-slate-50 hover:bg-white border-2 border-slate-200 hover:border-sky-400 rounded-[2rem] p-6 flex justify-between items-center transition-all btn-3d"
-                  style={{ '--border-color': 'var(--duo-blue-border)' } as any}
-                >
-                  <div className="text-left">
-                    <h3 className="text-xl font-black text-slate-800">
-                      {unitId === 'Escucha' ? 'Práctica Escucha' : 'Práctica Lectura'}
-                    </h3>
-                    <p className="text-slate-400 font-bold text-sm">
-                      {unitId === 'Escucha' ? 'Escucha → Japonés' : 'Kanji/Kana → Español'}
-                    </p>
-                  </div>
-                  <div className="w-14 h-14 rounded-2xl bg-sky-100 text-sky-600 flex items-center justify-center group-hover:bg-sky-500 group-hover:text-white transition-all">
-                    <Play fill="currentColor" size={24} />
-                  </div>
-                </a>
+            return (
+              <motion.section
+                key={lesson.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="bg-white rounded-[2.5rem] border-2 border-slate-200 shadow-sm p-8"
+              >
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="w-2 h-10 rounded-full bg-sky-500" />
+                  <h2 className="text-3xl font-black text-slate-800">
+                    {lesson.title}
+                  </h2>
+                  {selectedInLesson.length > 0 && (
+                    <span className="bg-sky-100 text-sky-600 px-4 py-1 rounded-full text-sm font-black">
+                      {selectedInLesson.length} seleccionadas
+                    </span>
+                  )}
+                </div>
 
-                <a
-                  href={`/practice/es-ja?lessonId=${lesson.id}&limit=${questionLimit}`}
-                  className="group bg-slate-50 hover:bg-white border-2 border-slate-200 hover:border-green-400 rounded-[2rem] p-6 flex justify-between items-center transition-all btn-3d"
-                  style={{ '--border-color': 'var(--duo-green-border)' } as any}
-                >
-                  <div className="text-left">
-                    <h3 className="text-xl font-black text-slate-800">Práctica Escritura</h3>
-                    <p className="text-slate-400 font-bold text-sm">Español → Japonés</p>
-                  </div>
-                  <div className="w-14 h-14 rounded-2xl bg-green-100 text-green-600 flex items-center justify-center group-hover:bg-green-500 group-hover:text-white transition-all">
-                    <BookOpen size={24} />
-                  </div>
-                </a>
-              </div>
-
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-4">
-                {wordsByLesson[lesson.id]?.map((word) => (
-                  <motion.div
-                    key={word.id}
-                    whileHover={{ scale: 1.05 }}
-                    className="bg-gradient-to-b from-white to-slate-50 border-2 border-slate-100 rounded-2xl p-4 text-center hover:border-sky-300 hover:shadow-md transition-all group"
+                <div className="grid md:grid-cols-2 gap-6 mb-10">
+                  <a
+                    href={`/practice/${unitId === 'Escucha' ? 'audio' : 'ja-es'}?lessonId=${lesson.id}&limit=${questionLimit}${queryIds}`}
+                    className="group bg-slate-50 hover:bg-white border-2 border-slate-200 hover:border-sky-400 rounded-[2rem] p-6 flex justify-between items-center transition-all btn-3d"
+                    style={{ '--border-color': 'var(--duo-blue-border)' } as any}
                   >
-                    <div className="text-2xl font-black text-slate-800 group-hover:text-sky-600 transition-colors">{word.kanji}</div>
-                    <div className="text-xs font-bold text-slate-400 mt-1 uppercase tracking-tighter">{word.reading}</div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.section>
-          ))}
+                    <div className="text-left">
+                      <h3 className="text-xl font-black text-slate-800">
+                        {unitId === 'Escucha' ? 'Práctica Escucha' : 'Práctica Lectura'}
+                      </h3>
+                      <p className="text-slate-400 font-bold text-sm">
+                        {unitId === 'Escucha' ? 'Escucha → Japonés' : 'Kanji/Kana → Español'}
+                      </p>
+                    </div>
+                    <div className="w-14 h-14 rounded-2xl bg-sky-100 text-sky-600 flex items-center justify-center group-hover:bg-sky-500 group-hover:text-white transition-all">
+                      <Play fill="currentColor" size={24} />
+                    </div>
+                  </a>
+
+                  <a
+                    href={`/practice/es-ja?lessonId=${lesson.id}&limit=${questionLimit}${queryIds}`}
+                    className="group bg-slate-50 hover:bg-white border-2 border-slate-200 hover:border-green-400 rounded-[2rem] p-6 flex justify-between items-center transition-all btn-3d"
+                    style={{ '--border-color': 'var(--duo-green-border)' } as any}
+                  >
+                    <div className="text-left">
+                      <h3 className="text-xl font-black text-slate-800">Práctica Escritura</h3>
+                      <p className="text-slate-400 font-bold text-sm">Español → Japonés</p>
+                    </div>
+                    <div className="w-14 h-14 rounded-2xl bg-green-100 text-green-600 flex items-center justify-center group-hover:bg-green-500 group-hover:text-white transition-all">
+                      <BookOpen size={24} />
+                    </div>
+                  </a>
+                </div>
+
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-4">
+                  {lessonWords.map((word) => {
+                    const isSelected = word.id ? selectedItems.has(word.id) : false;
+                    return (
+                      <motion.div
+                        key={word.id}
+                        whileHover={{ scale: 1.05 }}
+                        onClick={() => word.id && toggleSelection(word.id)}
+                        className={`cursor-pointer rounded-2xl p-4 text-center transition-all group flex flex-col justify-center border-2 ${
+                          isSelected 
+                            ? 'bg-sky-50 border-sky-400 shadow-md ring-2 ring-sky-400/20' 
+                            : 'bg-gradient-to-b from-white to-slate-50 border-slate-100 hover:border-sky-300 hover:shadow-md'
+                        }`}
+                      >
+                        <div className={`text-xl font-black transition-colors leading-tight px-1 ${isSelected ? 'text-sky-700' : 'text-slate-800 group-hover:text-sky-600'}`}>
+                          {word.meanings[0]}
+                        </div>
+                        <div className={`text-xs font-bold mt-2 uppercase tracking-widest px-1 ${isSelected ? 'text-sky-500' : 'text-slate-400'}`}>
+                          {word.kanji}
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              </motion.section>
+            );
+          })}
         </div>
       </div>
     </div>

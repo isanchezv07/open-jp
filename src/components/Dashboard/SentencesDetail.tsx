@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, Play, BookOpen, MessageCircle, Star, X, Trophy, Home, RefreshCw } from 'lucide-react';
 import { sentenceExercises } from '../../lib/data/sentences';
 import SentenceOrderPractice from '../Practice/SentenceOrderPractice';
+import ImageBinaryPractice from '../Practice/ImageBinaryPractice';
 import { performanceMessages } from '../../lib/constants/messages';
 import CompletionCelebration from '../Common/CompletionCelebration';
 
@@ -15,6 +16,15 @@ export default function SentencesDetail() {
   const [isFinished, setIsFinished] = useState(false);
   const [correctCount, setCorrectCount] = useState(0);
 
+  const [selectedItems, setSelectedItems] = useState<Set<string>>(new Set());
+
+  const toggleSelection = (id: string) => {
+    const next = new Set(selectedItems);
+    if (next.has(id)) next.delete(id);
+    else next.add(id);
+    setSelectedItems(next);
+  };
+
   const categories = useMemo(() => {
     const cats = Array.from(new Set(sentenceExercises.map(e => e.category)));
     return cats.map(cat => ({
@@ -24,7 +34,14 @@ export default function SentencesDetail() {
   }, []);
 
   const startPractice = (mode: 'ja-es' | 'es-ja', category: string) => {
-    const catExercises = sentenceExercises.filter(e => e.category === category);
+    let catExercises = sentenceExercises.filter(e => e.category === category);
+    
+    // Filter by selection if any selected for this category
+    const selectedInCategory = catExercises.filter(e => selectedItems.has(e.id));
+    if (selectedInCategory.length > 0) {
+      catExercises = selectedInCategory;
+    }
+
     if (catExercises.length === 0) return;
 
     const shuffled = [...catExercises].sort(() => Math.random() - 0.5);
@@ -102,11 +119,18 @@ export default function SentencesDetail() {
             exit={{ opacity: 0, x: -20 }}
             transition={{ duration: 0.3 }}
           >
-            <SentenceOrderPractice 
-                exercise={currentExercise} 
-                mode={activePractice.mode}
-                onComplete={handleComplete} 
-            />
+            {currentExercise.type === 'image_binary' ? (
+              <ImageBinaryPractice 
+                  exercise={currentExercise} 
+                  onComplete={handleComplete} 
+              />
+            ) : (
+              <SentenceOrderPractice 
+                  exercise={currentExercise} 
+                  mode={activePractice.mode}
+                  onComplete={handleComplete} 
+              />
+            )}
           </motion.div>
         </AnimatePresence>
       </div>
@@ -125,7 +149,7 @@ export default function SentencesDetail() {
             <a href="/" className="w-16 h-16 rounded-3xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition-all text-slate-500"><ArrowLeft size={28} /></a>
             <div className="flex-1">
               <h1 className="text-4xl font-black text-slate-800 tracking-tight">Unidad: Oraciones</h1>
-              <p className="text-slate-400 font-bold mt-1">Practica la estructura gramatical ordenando palabras.</p>
+              <p className="text-slate-400 font-bold mt-1">Selecciona las oraciones que desees practicar o practica con todas.</p>
             </div>
             <div className="bg-slate-50 rounded-2xl border-2 border-slate-200 p-4">
               <label className="block text-xs uppercase tracking-widest font-black text-slate-400 mb-2">Nº Preguntas</label>
@@ -135,25 +159,69 @@ export default function SentencesDetail() {
         </motion.div>
 
         <div className="space-y-8">
-          {categories.map((cat, index) => (
-            <motion.section key={cat.name} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.1 }} className="bg-white rounded-[2.5rem] border-2 border-slate-200 shadow-sm p-8">
-              <div className="flex items-center gap-4 mb-8">
-                <div className="w-2 h-10 rounded-full bg-teal-500" />
-                <h2 className="text-3xl font-black text-slate-800">{cat.name}</h2>
-                <span className="bg-slate-100 text-slate-500 px-4 py-1 rounded-full text-sm font-black">{cat.exercises.length} ejercicios</span>
-              </div>
-              <div className="grid md:grid-cols-2 gap-6 mb-8">
-                <button onClick={() => startPractice('ja-es', cat.name)} className="group bg-slate-50 hover:bg-white border-2 border-slate-200 hover:border-sky-400 rounded-[2rem] p-6 flex justify-between items-center transition-all btn-3d" style={{ '--border-color': 'var(--duo-blue-border)' } as any}>
-                  <div className="text-left"><h3 className="text-xl font-black text-slate-800">Lectura</h3><p className="text-slate-400 font-bold text-sm">Japonés → Español</p></div>
-                  <div className="w-14 h-14 rounded-2xl bg-sky-100 text-sky-600 flex items-center justify-center group-hover:bg-sky-500 group-hover:text-white transition-all"><Play fill="currentColor" size={24} /></div>
-                </button>
-                <button onClick={() => startPractice('es-ja', cat.name)} className="group bg-slate-50 hover:bg-white border-2 border-slate-200 hover:border-green-400 rounded-[2rem] p-6 flex justify-between items-center transition-all btn-3d" style={{ '--border-color': 'var(--duo-green-border)' } as any}>
-                  <div className="text-left"><h3 className="text-xl font-black text-slate-800">Escritura</h3><p className="text-slate-400 font-bold text-sm">Español → Japonés</p></div>
-                  <div className="w-14 h-14 rounded-2xl bg-green-100 text-green-600 flex items-center justify-center group-hover:bg-green-500 group-hover:text-white transition-all"><BookOpen size={24} /></div>
-                </button>
-              </div>
-            </motion.section>
-          ))}
+          {categories.map((cat, index) => {
+            const isImageBinary = cat.exercises.every(e => e.type === 'image_binary');
+            const selectedInCategory = cat.exercises.filter(e => selectedItems.has(e.id));
+            
+            return (
+              <motion.section key={cat.name} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.1 }} className="bg-white rounded-[2.5rem] border-2 border-slate-200 shadow-sm p-8">
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="w-2 h-10 rounded-full bg-teal-500" />
+                  <h2 className="text-3xl font-black text-slate-800">{cat.name}</h2>
+                  <span className="bg-slate-100 text-slate-500 px-4 py-1 rounded-full text-sm font-black">{cat.exercises.length} ejercicios</span>
+                  {selectedInCategory.length > 0 && (
+                    <span className="bg-teal-100 text-teal-600 px-4 py-1 rounded-full text-sm font-black">
+                      {selectedInCategory.length} seleccionadas
+                    </span>
+                  )}
+                </div>
+                {isImageBinary ? (
+                  <div className="grid grid-cols-1 gap-6 mb-8">
+                    <button onClick={() => startPractice('ja-es', cat.name)} className="group bg-slate-50 hover:bg-white border-2 border-slate-200 hover:border-purple-400 rounded-[2rem] p-6 flex justify-between items-center transition-all btn-3d" style={{ '--border-color': '#a855f7' } as any}>
+                      <div className="text-left"><h3 className="text-xl font-black text-slate-800">Verificación Visual</h3><p className="text-slate-400 font-bold text-sm">Determina si la oración coincide con la imagen</p></div>
+                      <div className="w-14 h-14 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center group-hover:bg-purple-500 group-hover:text-white transition-all"><Star fill="currentColor" size={24} /></div>
+                    </button>
+                  </div>
+                ) : (
+                  <div className="grid md:grid-cols-2 gap-6 mb-8">
+                    <button onClick={() => startPractice('ja-es', cat.name)} className="group bg-slate-50 hover:bg-white border-2 border-slate-200 hover:border-sky-400 rounded-[2rem] p-6 flex justify-between items-center transition-all btn-3d" style={{ '--border-color': 'var(--duo-blue-border)' } as any}>
+                      <div className="text-left"><h3 className="text-xl font-black text-slate-800">Lectura</h3><p className="text-slate-400 font-bold text-sm">Japonés → Español</p></div>
+                      <div className="w-14 h-14 rounded-2xl bg-sky-100 text-sky-600 flex items-center justify-center group-hover:bg-sky-500 group-hover:text-white transition-all"><Play fill="currentColor" size={24} /></div>
+                    </button>
+                    <button onClick={() => startPractice('es-ja', cat.name)} className="group bg-slate-50 hover:bg-white border-2 border-slate-200 hover:border-green-400 rounded-[2rem] p-6 flex justify-between items-center transition-all btn-3d" style={{ '--border-color': 'var(--duo-green-border)' } as any}>
+                      <div className="text-left"><h3 className="text-xl font-black text-slate-800">Escritura</h3><p className="text-slate-400 font-bold text-sm">Español → Japonés</p></div>
+                      <div className="w-14 h-14 rounded-2xl bg-green-100 text-green-600 flex items-center justify-center group-hover:bg-green-500 group-hover:text-white transition-all"><BookOpen size={24} /></div>
+                    </button>
+                  </div>
+                )}
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {cat.exercises.map((exercise) => {
+                    const isSelected = selectedItems.has(exercise.id);
+                    return (
+                      <motion.div
+                        key={exercise.id}
+                        whileHover={{ scale: 1.02 }}
+                        onClick={() => toggleSelection(exercise.id)}
+                        className={`cursor-pointer rounded-2xl p-4 text-center transition-all group flex flex-col justify-center min-h-[6rem] border-2 ${
+                          isSelected
+                            ? 'bg-teal-50 border-teal-400 shadow-md ring-2 ring-teal-400/20'
+                            : 'bg-gradient-to-b from-white to-slate-50 border-slate-100 hover:border-teal-300 hover:shadow-md'
+                        }`}
+                      >
+                        <div className={`text-lg font-black transition-colors leading-tight px-1 ${isSelected ? 'text-teal-700' : 'text-slate-800 group-hover:text-teal-600'}`}>
+                          {exercise.translation}
+                        </div>
+                        <div className={`text-sm font-bold mt-2 tracking-widest px-1 ${isSelected ? 'text-teal-500' : 'text-slate-400'}`}>
+                          {exercise.japanese}
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              </motion.section>
+            );
+          })}
         </div>
       </div>
     </div>

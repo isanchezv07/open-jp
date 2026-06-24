@@ -25,13 +25,20 @@ export interface SentenceExercise {
   id: string;
   lessonId: number;
   category: string;
-  type: 'sentence_order';
+  type: 'sentence_order' | 'image_binary';
   japanese: string;
   translation: string;
-  words: string[]; // Japanese words
+  
+  // sentence_order props
+  words?: string[]; // Japanese words
   spanishWords?: string[]; // Optional Spanish words for ja-es mode
   distractors?: string[]; // Extra Japanese words to make it harder
   spanishDistractors?: string[]; // Extra Spanish words to make it harder
+  
+  // image_binary props
+  imageUrl?: string;
+  isTrue?: boolean;
+  
   difficulty?: 'easy' | 'medium' | 'hard';
 }
 
