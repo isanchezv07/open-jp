@@ -1,4 +1,13 @@
-# open-jp
+<pre style="font-family: 'Courier New', monospace; white-space: pre; overflow-x: auto;">
+ $$$$$$\  $$$$$$$\  $$$$$$$$\ $$\   $$\            $$$$$\ $$$$$$$\  
+$$  __$$\ $$  __$$\ $$  _____|$$$\  $$ |           \__$$ |$$  __$$\ 
+$$ /  $$ |$$ |  $$ |$$ |      $$$$\ $$ |              $$ |$$ |  $$ |
+$$ |  $$ |$$$$$$$  |$$$$$\    $$ $$\$$ |$$$$$$\       $$ |$$$$$$$  |
+$$ |  $$ |$$  ____/ $$  __|   $$ \$$$$ |\______|$$\   $$ |$$  ____/ 
+$$ |  $$ |$$ |      $$ |      $$ |\$$$ |        $$ |  $$ |$$ |      
+ $$$$$$  |$$ |      $$$$$$$$\ $$ | \$$ |        \$$$$$$  |$$ |      
+ \______/ \__|      \________|\__|  \__|         \______/ \__|      
+</pre>
 
 Open-jp es una plataforma diseñada para el aprendizaje eficiente de japonés, centrada en la organización del contenido y la práctica activa.
 
