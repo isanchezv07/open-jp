@@ -19,7 +19,7 @@ Es una aplicación web interactiva que ayuda a los estudiantes de japonés a est
 ## ⚠️ Nota Importante sobre el Reconocimiento Visual
 > [!WARNING]
 > **Imágenes de la API externa**
-> Las imágenes utilizadas en los ejercicios de reconocimiento visual provienen de una API externa. Debido a esto, es posible que en ocasiones las imágenes tarden en cargar, no se muestren o fallen si la API experimenta intermitencias, límites de uso o cortes temporales. 
+> Las imágenes utilizadas en los ejercicios de reconocimiento visual provienen de una API interna. Debido a esto, es posible que en ocasiones las imágenes tarden en cargar, no se muestren o fallen si la API experimenta intermitencias. 
 
 ## Características Principales
 * **Estructura Organizada:** El contenido está dividido en Unidades (ej. Hiragana, Kanji, Verbos) y cada unidad contiene Lecciones específicas.
