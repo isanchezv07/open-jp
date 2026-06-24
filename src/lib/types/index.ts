@@ -16,6 +16,7 @@ export interface Word {
   lessonId: number;
   jlpt: number;
   image_url?: string;
+  keyWord: string;
   audio_url?: string;
   example_ja?: string;
   example_es?: string;
@@ -37,6 +38,7 @@ export interface SentenceExercise {
   
   // image_binary props
   imageUrls?: string[];
+  keyword?: string;
   isTrue?: boolean;
   
   difficulty?: 'easy' | 'medium' | 'hard';

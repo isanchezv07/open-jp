@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, X, RefreshCw } from 'lucide-react';
+import { Check, X, RefreshCw, Loader2 } from 'lucide-react';
 import type { SentenceExercise } from '../../lib/types/index';
 
 interface SentenceOrderPracticeProps {
@@ -21,6 +21,26 @@ export default function SentenceOrderPractice({ exercise, mode = 'es-ja', onComp
   const [selectedWords, setSelectedWords] = useState<string[]>([]);
   const [shuffledWords, setShuffledWords] = useState(() => [...allOptions].sort(() => Math.random() - 0.5));
   const [status, setStatus] = useState<'idle' | 'correct' | 'incorrect'>('idle');
+
+  const [fetchedImageUrl, setFetchedImageUrl] = useState<string | null>(null);
+  const [isLoadingImage, setIsLoadingImage] = useState(false);
+
+  useEffect(() => {
+    setFetchedImageUrl(null);
+    if (exercise.keyword) {
+      setIsLoadingImage(true);
+      fetch(`/api/irasutoya/${encodeURIComponent(exercise.keyword)}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data && data.length > 0) {
+            const randomIndex = Math.floor(Math.random() * data.length);
+            setFetchedImageUrl(data[randomIndex].imageUrl);
+          }
+        })
+        .catch(err => console.error(err))
+        .finally(() => setIsLoadingImage(false));
+    }
+  }, [exercise]);
 
   const handleWordClick = (word: string, index: number) => {
     if (status !== 'idle') return;
@@ -68,7 +88,24 @@ export default function SentenceOrderPractice({ exercise, mode = 'es-ja', onComp
         <h2 className="text-3xl font-black text-slate-800 leading-tight">{prompt}</h2>
       </div>
 
-      <div className="min-h-[6rem] bg-slate-50 border-2 border-dashed border-slate-200 rounded-[2rem] p-6 flex flex-wrap gap-3 justify-center items-center">
+      <div className="relative">
+        {isLoadingImage ? (
+          <div className="flex flex-col items-center gap-3 text-slate-400">
+            <Loader2 className="animate-spin" size={32} />
+            <span className="font-bold text-sm tracking-widest uppercase">Buscando ilustración...</span>
+          </div>
+        ) : (
+          fetchedImageUrl && (
+            <img 
+              src={fetchedImageUrl} 
+              alt="Visual context" 
+              className="mx-auto h-40 object-contain p-2 transition-transform duration-500 hover:scale-105"
+            />
+          )
+        )}
+      </div>
+
+      <div className="min-h-24 bg-slate-50 border-2 border-dashed border-slate-200 rounded-4xl p-6 flex flex-wrap gap-3 justify-center items-center">
         <AnimatePresence>
           {selectedWords.map((word, index) => (
             <motion.button

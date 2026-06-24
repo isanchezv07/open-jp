@@ -23,7 +23,7 @@ export default function CompletionCelebration({ accuracy, xp, message, onHome, o
         initial={{ scale: 0.9, y: 20 }}
         animate={{ scale: 1, y: 0 }}
         transition={{ type: 'spring', stiffness: 200, damping: 20 }}
-        className="w-full max-w-xl bg-white rounded-[2rem] sm:rounded-[3rem] p-6 sm:p-10 text-center shadow-sm border-2 border-slate-200 relative"
+        className="w-full max-w-xl bg-white rounded-4xl sm:rounded-[3rem] p-6 sm:p-10 text-center shadow-sm border-2 border-slate-200 relative"
       >
         {/* Decorative Stars for excellent performance */}
         {isExcellent && (
@@ -52,7 +52,7 @@ export default function CompletionCelebration({ accuracy, xp, message, onHome, o
               initial={{ x: -20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay: 0.4 }}
-              className="bg-green-50/50 p-4 sm:p-6 rounded-[1.5rem] sm:rounded-[2rem] border-2 border-green-100"
+              className="bg-green-50/50 p-4 sm:p-6 rounded-3xl sm:rounded-4xl border-2 border-green-100"
             >
               <div className="flex justify-center mb-2 sm:mb-3">
                   <div className="p-2 sm:p-3 bg-green-500 rounded-xl sm:rounded-2xl text-white shadow-sm">
@@ -67,7 +67,7 @@ export default function CompletionCelebration({ accuracy, xp, message, onHome, o
               initial={{ x: 20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay: 0.5 }}
-              className="bg-sky-50/50 p-4 sm:p-6 rounded-[1.5rem] sm:rounded-[2rem] border-2 border-sky-100"
+              className="bg-sky-50/50 p-4 sm:p-6 rounded-3xl sm:rounded-4xl border-2 border-sky-100"
             >
               <div className="flex justify-center mb-2 sm:mb-3">
                   <div className="p-2 sm:p-3 bg-sky-500 rounded-xl sm:rounded-2xl text-white shadow-sm">
@@ -86,7 +86,7 @@ export default function CompletionCelebration({ accuracy, xp, message, onHome, o
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.7 }}
               onClick={onHome}
-              className="w-full bg-sky-500 hover:bg-sky-400 text-white py-4 sm:py-6 rounded-[1.5rem] sm:rounded-[2rem] font-black text-xl sm:text-2xl flex items-center justify-center gap-3 sm:gap-4 transition-all btn-3d"
+              className="w-full bg-sky-500 hover:bg-sky-400 text-white py-4 sm:py-6 rounded-3xl sm:rounded-4xl font-black text-xl sm:text-2xl flex items-center justify-center gap-3 sm:gap-4 transition-all btn-3d"
               style={{'--border-color': 'var(--duo-blue-border)'} as any}
             >
               <Home size={24} className="sm:w-7 sm:h-7" strokeWidth={3} />
@@ -98,7 +98,7 @@ export default function CompletionCelebration({ accuracy, xp, message, onHome, o
               animate={{ opacity: 1 }}
               transition={{ delay: 0.9 }}
               onClick={onRetry}
-              className="w-full bg-transparent text-slate-400 py-3 sm:py-4 rounded-[1.5rem] sm:rounded-[2rem] font-black text-base sm:text-lg hover:text-slate-600 hover:bg-slate-50 transition-all flex items-center justify-center gap-2"
+              className="w-full bg-transparent text-slate-400 py-3 sm:py-4 rounded-3xl sm:rounded-4xl font-black text-base sm:text-lg hover:text-slate-600 hover:bg-slate-50 transition-all flex items-center justify-center gap-2"
             >
               <RefreshCw size={18} className="sm:w-5 sm:h-5" />
               Repetir esta lección

@@ -259,7 +259,7 @@ export default function PracticeSession({ mode }: PracticeSessionProps) {
             animate={{ width: `${Math.min((questionCount / maxQuestions) * 100, 100)}%` }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="absolute inset-0 bg-gradient-to-b from-green-400 via-green-500 to-green-600" />
+            <div className="absolute inset-0 bg-linear-to-b from-green-400 via-green-500 to-green-600" />
             <div className="absolute inset-x-0 top-0 h-1/2 bg-white/25 rounded-full" />
             <div className="absolute inset-0 bg-green-400/30 blur-md" />
           </motion.div>
@@ -273,8 +273,8 @@ export default function PracticeSession({ mode }: PracticeSessionProps) {
             {renderPrompt()}
             {!isRevealed ? (
               <form onSubmit={handleSubmit} className="w-full mt-4 max-w-lg">
-                <input type="text" autoFocus lang={mode === 'es-ja' ? 'ja' : 'es'} placeholder={mode === 'es-ja' ? 'Respuesta en japonés...' : 'Respuesta en español...'} className="w-full p-6 text-2xl border-2 border-slate-200 rounded-[2rem] focus:border-sky-400 outline-none transition-all bg-slate-50 focus:bg-white text-center font-bold placeholder:text-slate-300" value={userInput} onChange={(e) => setUserInput(e.target.value)} autoComplete="off"/>
-                <button type="submit" disabled={!userInput.trim()} style={{ '--border-color': 'var(--duo-blue-border)' } as any} className={`mt-8 w-full p-6 rounded-[2rem] font-black text-xl uppercase tracking-widest transition-all btn-3d ${userInput.trim() ? 'bg-sky-500 text-white' : 'bg-slate-100 text-slate-300 cursor-not-allowed border-slate-200'}`}>COMPROBAR</button>
+                <input type="text" autoFocus lang={mode === 'es-ja' ? 'ja' : 'es'} placeholder={mode === 'es-ja' ? 'Respuesta en japonés...' : 'Respuesta en español...'} className="w-full p-6 text-2xl border-2 border-slate-200 rounded-4xl focus:border-sky-400 outline-none transition-all bg-slate-50 focus:bg-white text-center font-bold placeholder:text-slate-300" value={userInput} onChange={(e) => setUserInput(e.target.value)} autoComplete="off"/>
+                <button type="submit" disabled={!userInput.trim()} style={{ '--border-color': 'var(--duo-blue-border)' } as any} className={`mt-8 w-full p-6 rounded-4xl font-black text-xl uppercase tracking-widest transition-all btn-3d ${userInput.trim() ? 'bg-sky-500 text-white' : 'bg-slate-100 text-slate-300 cursor-not-allowed border-slate-200'}`}>COMPROBAR</button>
               </form>
             ) : (
               <div className="w-full max-w-lg space-y-8 mt-4">
@@ -287,7 +287,7 @@ export default function PracticeSession({ mode }: PracticeSessionProps) {
                    </div>
                 </motion.div>
                 <div className="flex flex-col gap-4">
-                  <button onClick={() => handleSRSFeedback(isCorrect ? 2 : 0)} style={{ '--border-color': isCorrect ? 'var(--duo-green-border)' : 'var(--duo-blue-border)' } as any} className={`w-full p-6 rounded-[2rem] font-black text-xl uppercase tracking-widest transition-all btn-3d ${isCorrect ? 'bg-green-500 text-white' : 'bg-sky-500 text-white'}`}>SIGUIENTE</button>
+                  <button onClick={() => handleSRSFeedback(isCorrect ? 2 : 0)} style={{ '--border-color': isCorrect ? 'var(--duo-green-border)' : 'var(--duo-blue-border)' } as any} className={`w-full p-6 rounded-4xl font-black text-xl uppercase tracking-widest transition-all btn-3d ${isCorrect ? 'bg-green-500 text-white' : 'bg-sky-500 text-white'}`}>SIGUIENTE</button>
                   <p className="text-slate-300 font-bold text-xs">PULSA ENTER PARA CONTINUAR</p>
                 </div>
               </div>

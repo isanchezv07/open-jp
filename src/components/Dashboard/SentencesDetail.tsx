@@ -108,7 +108,7 @@ export default function SentencesDetail() {
                     animate={{ width: `${(currentIndex / practiceSet.length) * 100}%` }}
                     transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                 >
-                    <div className="absolute inset-0 bg-gradient-to-b from-green-400 via-green-500 to-green-600" />
+                    <div className="absolute inset-0 bg-linear-to-b from-green-400 via-green-500 to-green-600" />
                     <div className="absolute inset-x-0 top-0 h-1/2 bg-white/25 rounded-full" />
                     <div className="absolute inset-0 bg-green-400/30 blur-md" />
                 </motion.div>
@@ -145,7 +145,7 @@ export default function SentencesDetail() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-sky-50">
+    <div className="min-h-screen bg-linear-to-b from-slate-50 via-white to-sky-50">
       <div className="max-w-6xl mx-auto px-6 py-10 space-y-8">
         <motion.div
           initial={{ opacity: 0, y: -10 }}
@@ -184,18 +184,18 @@ export default function SentencesDetail() {
                 </div>
                 {isImageBinary ? (
                   <div className="grid grid-cols-1 gap-6 mb-8">
-                    <button onClick={() => startPractice('ja-es', cat.name)} className="group bg-slate-50 hover:bg-white border-2 border-slate-200 hover:border-purple-400 rounded-[2rem] p-6 flex justify-between items-center transition-all btn-3d" style={{ '--border-color': '#a855f7' } as any}>
+                    <button onClick={() => startPractice('ja-es', cat.name)} className="group bg-slate-50 hover:bg-white border-2 border-slate-200 hover:border-purple-400 rounded-4xl p-6 flex justify-between items-center transition-all btn-3d" style={{ '--border-color': '#a855f7' } as any}>
                       <div className="text-left"><h3 className="text-xl font-black text-slate-800">Verificación Visual</h3><p className="text-slate-400 font-bold text-sm">Determina si la oración coincide con la imagen</p></div>
                       <div className="w-14 h-14 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center group-hover:bg-purple-500 group-hover:text-white transition-all"><Star fill="currentColor" size={24} /></div>
                     </button>
                   </div>
                 ) : (
                   <div className="grid md:grid-cols-2 gap-6 mb-8">
-                    <button onClick={() => startPractice('ja-es', cat.name)} className="group bg-slate-50 hover:bg-white border-2 border-slate-200 hover:border-sky-400 rounded-[2rem] p-6 flex justify-between items-center transition-all btn-3d" style={{ '--border-color': 'var(--duo-blue-border)' } as any}>
+                    <button onClick={() => startPractice('ja-es', cat.name)} className="group bg-slate-50 hover:bg-white border-2 border-slate-200 hover:border-sky-400 rounded-4xl p-6 flex justify-between items-center transition-all btn-3d" style={{ '--border-color': 'var(--duo-blue-border)' } as any}>
                       <div className="text-left"><h3 className="text-xl font-black text-slate-800">Lectura</h3><p className="text-slate-400 font-bold text-sm">Japonés → Español</p></div>
                       <div className="w-14 h-14 rounded-2xl bg-sky-100 text-sky-600 flex items-center justify-center group-hover:bg-sky-500 group-hover:text-white transition-all"><Play fill="currentColor" size={24} /></div>
                     </button>
-                    <button onClick={() => startPractice('es-ja', cat.name)} className="group bg-slate-50 hover:bg-white border-2 border-slate-200 hover:border-green-400 rounded-[2rem] p-6 flex justify-between items-center transition-all btn-3d" style={{ '--border-color': 'var(--duo-green-border)' } as any}>
+                    <button onClick={() => startPractice('es-ja', cat.name)} className="group bg-slate-50 hover:bg-white border-2 border-slate-200 hover:border-green-400 rounded-4xl p-6 flex justify-between items-center transition-all btn-3d" style={{ '--border-color': 'var(--duo-green-border)' } as any}>
                       <div className="text-left"><h3 className="text-xl font-black text-slate-800">Escritura</h3><p className="text-slate-400 font-bold text-sm">Español → Japonés</p></div>
                       <div className="w-14 h-14 rounded-2xl bg-green-100 text-green-600 flex items-center justify-center group-hover:bg-green-500 group-hover:text-white transition-all"><BookOpen size={24} /></div>
                     </button>
@@ -210,10 +210,10 @@ export default function SentencesDetail() {
                         key={exercise.id}
                         whileHover={{ scale: 1.02 }}
                         onClick={() => toggleSelection(exercise.id)}
-                        className={`cursor-pointer rounded-2xl p-4 text-center transition-all group flex flex-col justify-center min-h-[6rem] border-2 ${
+                        className={`cursor-pointer rounded-2xl p-4 text-center transition-all group flex flex-col justify-center min-h-24 border-2 ${
                           isSelected
                             ? 'bg-teal-50 border-teal-400 shadow-md ring-2 ring-teal-400/20'
-                            : 'bg-gradient-to-b from-white to-slate-50 border-slate-100 hover:border-teal-300 hover:shadow-md'
+                            : 'bg-linear-to-b from-white to-slate-50 border-slate-100 hover:border-teal-300 hover:shadow-md'
                         }`}
                       >
                         <div className={`text-lg font-black transition-colors leading-tight px-1 ${isSelected ? 'text-teal-700' : 'text-slate-800 group-hover:text-teal-600'}`}>

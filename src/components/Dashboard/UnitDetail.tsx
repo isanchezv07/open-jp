@@ -43,7 +43,7 @@ export default function UnitDetail({ unitId }: UnitDetailProps) {
   }, [unitId]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-sky-50">
+    <div className="min-h-screen bg-linear-to-b from-slate-50 via-white to-sky-50">
       <div className="max-w-6xl mx-auto px-6 py-10 space-y-8">
         {/* Header */}
         <motion.div
@@ -135,7 +135,7 @@ export default function UnitDetail({ unitId }: UnitDetailProps) {
                 <div className="grid md:grid-cols-2 gap-6 mb-10">
                   <a
                     href={`/practice/${unitId === 'Escucha' ? 'audio' : 'ja-es'}?lessonId=${lesson.id}&limit=${questionLimit}${queryIds}`}
-                    className="group bg-slate-50 hover:bg-white border-2 border-slate-200 hover:border-sky-400 rounded-[2rem] p-6 flex justify-between items-center transition-all btn-3d"
+                    className="group bg-slate-50 hover:bg-white border-2 border-slate-200 hover:border-sky-400 rounded-4xl p-6 flex justify-between items-center transition-all btn-3d"
                     style={{ '--border-color': 'var(--duo-blue-border)' } as any}
                   >
                     <div className="text-left">
@@ -153,7 +153,7 @@ export default function UnitDetail({ unitId }: UnitDetailProps) {
 
                   <a
                     href={`/practice/es-ja?lessonId=${lesson.id}&limit=${questionLimit}${queryIds}`}
-                    className="group bg-slate-50 hover:bg-white border-2 border-slate-200 hover:border-green-400 rounded-[2rem] p-6 flex justify-between items-center transition-all btn-3d"
+                    className="group bg-slate-50 hover:bg-white border-2 border-slate-200 hover:border-green-400 rounded-4xl p-6 flex justify-between items-center transition-all btn-3d"
                     style={{ '--border-color': 'var(--duo-green-border)' } as any}
                   >
                     <div className="text-left">
@@ -177,7 +177,7 @@ export default function UnitDetail({ unitId }: UnitDetailProps) {
                         className={`cursor-pointer rounded-2xl p-4 text-center transition-all group flex flex-col justify-center border-2 ${
                           isSelected 
                             ? 'bg-sky-50 border-sky-400 shadow-md ring-2 ring-sky-400/20' 
-                            : 'bg-gradient-to-b from-white to-slate-50 border-slate-100 hover:border-sky-300 hover:shadow-md'
+                            : 'bg-linear-to-b from-white to-slate-50 border-slate-100 hover:border-sky-300 hover:shadow-md'
                         }`}
                       >
                         <div className={`text-xl font-black transition-colors leading-tight px-1 ${isSelected ? 'text-sky-700' : 'text-slate-800 group-hover:text-sky-600'}`}>

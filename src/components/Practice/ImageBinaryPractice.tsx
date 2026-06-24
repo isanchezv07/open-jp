@@ -17,18 +17,43 @@ export default function ImageBinaryPractice({ exercise, onComplete }: ImageBinar
     // Reset state when exercise changes
     setStatus('idle');
     setSelectedAnswer(null);
+    setFetchedImageUrl(null);
     
-    // Pick a random image from the imageUrls array if available
-    if (exercise.imageUrls && exercise.imageUrls.length > 0) {
+    if (exercise.keyword) {
+      setIsLoadingImage(true);
+      fetch(`/api/irasutoya/${encodeURIComponent(exercise.keyword)}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data && data.length > 0) {
+            const randomIndex = Math.floor(Math.random() * data.length);
+            setFetchedImageUrl(data[randomIndex].imageUrl);
+          } else if (exercise.imageUrls && exercise.imageUrls.length > 0) {
+            // Fallback to static if API returns no results
+            const randomIndex = Math.floor(Math.random() * exercise.imageUrls.length);
+            setFetchedImageUrl(exercise.imageUrls[randomIndex]);
+          }
+        })
+        .catch(err => {
+          console.error(err);
+          // Fallback
+          if (exercise.imageUrls && exercise.imageUrls.length > 0) {
+            const randomIndex = Math.floor(Math.random() * exercise.imageUrls.length);
+            setFetchedImageUrl(exercise.imageUrls[randomIndex]);
+          }
+        })
+        .finally(() => setIsLoadingImage(false));
+    } else if (exercise.imageUrls && exercise.imageUrls.length > 0) {
       const randomIndex = Math.floor(Math.random() * exercise.imageUrls.length);
       setFetchedImageUrl(exercise.imageUrls[randomIndex]);
+      setIsLoadingImage(false);
     } else if (exercise.imageUrl) {
       // Fallback for older data format
       setFetchedImageUrl(exercise.imageUrl);
+      setIsLoadingImage(false);
     } else {
       setFetchedImageUrl('https://images.unsplash.com/photo-1531686264889-56fdcabd163f?w=500&q=80');
+      setIsLoadingImage(false);
     }
-    setIsLoadingImage(false);
   }, [exercise]);
 
   const checkAnswer = (userAnswer: boolean) => {
@@ -65,7 +90,6 @@ export default function ImageBinaryPractice({ exercise, onComplete }: ImageBinar
           ¿La oración coincide con la imagen?
         </p>
         <h2 className="text-3xl font-black text-slate-800 leading-tight">{exercise.japanese}</h2>
-        <p className="text-slate-500 font-bold text-lg">{exercise.translation}</p>
       </div>
 
       <div className="">
@@ -83,14 +107,14 @@ export default function ImageBinaryPractice({ exercise, onComplete }: ImageBinar
             />
           )
         )}
-        <div className="absolute inset-0 border-4 border-black/5 rounded-[2rem] pointer-events-none"></div>
+        <div className="absolute inset-0 border-4 border-black/5 rounded-4xl pointer-events-none"></div>
       </div>
 
       <div className="flex gap-4 pt-4">
         <button
           onClick={() => checkAnswer(true)}
           disabled={status !== 'idle'}
-          className={`flex-1 py-5 rounded-[1.5rem] font-black text-xl transition-all btn-3d ${
+          className={`flex-1 py-5 rounded-3xl font-black text-xl transition-all btn-3d ${
             selectedAnswer === true
               ? status === 'correct'
                 ? 'bg-green-500 text-white'
@@ -110,7 +134,7 @@ export default function ImageBinaryPractice({ exercise, onComplete }: ImageBinar
         <button
           onClick={() => checkAnswer(false)}
           disabled={status !== 'idle'}
-          className={`flex-1 py-5 rounded-[1.5rem] font-black text-xl transition-all btn-3d ${
+          className={`flex-1 py-5 rounded-3xl font-black text-xl transition-all btn-3d ${
             selectedAnswer === false
               ? status === 'correct'
                 ? 'bg-rose-500 text-white'

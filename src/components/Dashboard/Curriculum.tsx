@@ -48,7 +48,7 @@ export default function Curriculum() {
       <motion.div 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative overflow-hidden bg-gradient-to-br from-sky-50 via-white to-indigo-50 rounded-[3.5rem] p-12 border-2 border-slate-100 shadow-xl shadow-sky-100/20"
+        className="relative overflow-hidden bg-linear-to-br from-sky-50 via-white to-indigo-50 rounded-[3.5rem] p-12 border-2 border-slate-100 shadow-xl shadow-sky-100/20"
       >
         <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-96 h-96 bg-sky-200/30 rounded-full blur-[100px]"></div>
         <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/4 w-96 h-96 bg-purple-200/30 rounded-full blur-[100px]"></div>
@@ -59,7 +59,7 @@ export default function Curriculum() {
                     <Zap size={14} fill="currentColor" /> Ruta de Aprendizaje
                 </div>
                 <h1 className="text-5xl md:text-6xl font-black tracking-tight leading-none text-slate-800">
-                    Domina el <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-indigo-500">Japonés</span>
+                    Domina el <span className="text-transparent bg-clip-text bg-linear-to-r from-sky-500 to-indigo-500">Japonés</span>
                 </h1>
                 <p className="text-slate-500 font-bold text-xl max-w-xl">
                     Un viaje estructurado desde los alfabetos básicos hasta la comprensión de oraciones complejas.
@@ -106,7 +106,7 @@ export default function Curriculum() {
               
               <div className="relative z-10 flex flex-col h-full">
                 <div 
-                  className="w-20 h-20 rounded-[2rem] flex items-center justify-center text-white mb-6 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300"
+                  className="w-20 h-20 rounded-4xl flex items-center justify-center text-white mb-6 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300"
                   style={{ backgroundColor: u.color, boxShadow: `0 10px 25px -5px ${u.color}66` }}
                 >
                   <u.icon size={40} strokeWidth={2.5} />
