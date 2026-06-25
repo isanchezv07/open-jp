@@ -43,24 +43,24 @@ export default function UnitDetail({ unitId }: UnitDetailProps) {
   }, [unitId]);
 
   return (
-    <div className="min-h-screen bg-linear-to-b from-slate-50 via-white to-sky-50">
+    <div className="min-h-screen bg-linear-to-b from-slate-50 via-white to-sky-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
       <div className="max-w-6xl mx-auto px-6 py-10 space-y-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-[2.5rem] border-2 border-slate-200 shadow-sm p-8"
+          className="bg-white dark:bg-slate-800 rounded-[2.5rem] border-2 border-slate-200 dark:border-slate-700 shadow-sm p-8"
         >
           <div className="flex flex-col lg:flex-row gap-8 lg:items-center">
             <a
               href="/"
-              className="w-16 h-16 rounded-3xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition-all text-slate-500"
+              className="w-16 h-16 rounded-3xl bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:bg-slate-600 flex items-center justify-center transition-all text-slate-500"
             >
               <ArrowLeft size={28} />
             </a>
 
             <div className="flex-1">
-              <h1 className="text-4xl font-black text-slate-800 tracking-tight">
+              <h1 className="text-4xl font-black text-slate-800 dark:text-slate-100 tracking-tight">
                 Unidad: {unitId}
               </h1>
               <p className="text-slate-400 font-bold mt-1">
@@ -68,7 +68,7 @@ export default function UnitDetail({ unitId }: UnitDetailProps) {
               </p>
             </div>
 
-            <div className="bg-slate-50 rounded-2xl border-2 border-slate-200 p-4">
+            <div className="bg-slate-50 dark:bg-slate-700/50 rounded-2xl border-2 border-slate-200 dark:border-slate-700 p-4">
               <label className="block text-xs uppercase tracking-widest font-black text-slate-400 mb-2">
                 Nº Preguntas
               </label>
@@ -77,7 +77,7 @@ export default function UnitDetail({ unitId }: UnitDetailProps) {
                 min="1"
                 value={questionLimit}
                 onChange={(e) => setQuestionLimit(Math.max(1, parseInt(e.target.value) || 1))}
-                className="w-24 rounded-xl border-2 border-slate-200 p-2 text-center font-black text-slate-700 outline-none focus:border-sky-500"
+                className="w-24 rounded-xl border-2 border-slate-200 dark:border-slate-700 p-2 text-center font-black text-slate-700 dark:text-slate-200 outline-none focus:border-sky-500"
               />
             </div>
           </div>
@@ -85,21 +85,21 @@ export default function UnitDetail({ unitId }: UnitDetailProps) {
 
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-white rounded-[2.5rem] p-8 border-2 border-slate-200 shadow-sm flex items-center gap-6">
+          <div className="bg-white dark:bg-slate-800 rounded-[2.5rem] p-8 border-2 border-slate-200 dark:border-slate-700 shadow-sm flex items-center gap-6">
             <div className="p-5 bg-sky-100 text-sky-600 rounded-3xl">
               <BookOpen size={32} />
             </div>
             <div>
-              <div className="text-3xl font-black text-slate-800">{stats.total}</div>
+              <div className="text-3xl font-black text-slate-800 dark:text-slate-100">{stats.total}</div>
               <div className="text-slate-400 font-bold uppercase text-xs tracking-widest">Palabras totales</div>
             </div>
           </div>
-          <div className="bg-white rounded-[2.5rem] p-8 border-2 border-slate-200 shadow-sm flex items-center gap-6">
+          <div className="bg-white dark:bg-slate-800 rounded-[2.5rem] p-8 border-2 border-slate-200 dark:border-slate-700 shadow-sm flex items-center gap-6">
             <div className="p-5 bg-amber-100 text-amber-600 rounded-3xl">
               <Trophy size={32} />
             </div>
             <div>
-              <div className="text-3xl font-black text-slate-800">{unitLessons.length}</div>
+              <div className="text-3xl font-black text-slate-800 dark:text-slate-100">{unitLessons.length}</div>
               <div className="text-slate-400 font-bold uppercase text-xs tracking-widest">Lecciones</div>
             </div>
           </div>
@@ -118,11 +118,11 @@ export default function UnitDetail({ unitId }: UnitDetailProps) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-white rounded-[2.5rem] border-2 border-slate-200 shadow-sm p-8"
+                className="bg-white dark:bg-slate-800 rounded-[2.5rem] border-2 border-slate-200 dark:border-slate-700 shadow-sm p-8"
               >
                 <div className="flex items-center gap-4 mb-8">
                   <div className="w-2 h-10 rounded-full bg-sky-500" />
-                  <h2 className="text-3xl font-black text-slate-800">
+                  <h2 className="text-3xl font-black text-slate-800 dark:text-slate-100">
                     {lesson.title}
                   </h2>
                   {selectedInLesson.length > 0 && (
@@ -135,11 +135,11 @@ export default function UnitDetail({ unitId }: UnitDetailProps) {
                 <div className="grid md:grid-cols-2 gap-6 mb-10">
                   <a
                     href={`/practice/${unitId === 'Escucha' ? 'audio' : 'ja-es'}?lessonId=${lesson.id}&limit=${questionLimit}${queryIds}`}
-                    className="group bg-slate-50 hover:bg-white border-2 border-slate-200 hover:border-sky-400 rounded-4xl p-6 flex justify-between items-center transition-all btn-3d"
+                    className="group bg-slate-50 dark:bg-slate-700/50 hover:bg-white dark:hover:bg-slate-800 dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 hover:border-sky-400 rounded-4xl p-6 flex justify-between items-center transition-all btn-3d"
                     style={{ '--border-color': 'var(--duo-blue-border)' } as any}
                   >
                     <div className="text-left">
-                      <h3 className="text-xl font-black text-slate-800">
+                      <h3 className="text-xl font-black text-slate-800 dark:text-slate-100">
                         {unitId === 'Escucha' ? 'Práctica Escucha' : 'Práctica Lectura'}
                       </h3>
                       <p className="text-slate-400 font-bold text-sm">
@@ -153,11 +153,11 @@ export default function UnitDetail({ unitId }: UnitDetailProps) {
 
                   <a
                     href={`/practice/es-ja?lessonId=${lesson.id}&limit=${questionLimit}${queryIds}`}
-                    className="group bg-slate-50 hover:bg-white border-2 border-slate-200 hover:border-green-400 rounded-4xl p-6 flex justify-between items-center transition-all btn-3d"
+                    className="group bg-slate-50 dark:bg-slate-700/50 hover:bg-white dark:hover:bg-slate-800 dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 hover:border-green-400 rounded-4xl p-6 flex justify-between items-center transition-all btn-3d"
                     style={{ '--border-color': 'var(--duo-green-border)' } as any}
                   >
                     <div className="text-left">
-                      <h3 className="text-xl font-black text-slate-800">Práctica Escritura</h3>
+                      <h3 className="text-xl font-black text-slate-800 dark:text-slate-100">Práctica Escritura</h3>
                       <p className="text-slate-400 font-bold text-sm">Español → Japonés</p>
                     </div>
                     <div className="w-14 h-14 rounded-2xl bg-green-100 text-green-600 flex items-center justify-center group-hover:bg-green-500 group-hover:text-white transition-all">
@@ -176,14 +176,14 @@ export default function UnitDetail({ unitId }: UnitDetailProps) {
                         onClick={() => word.id && toggleSelection(word.id)}
                         className={`cursor-pointer rounded-2xl p-4 text-center transition-all group flex flex-col justify-center border-2 ${
                           isSelected 
-                            ? 'bg-sky-50 border-sky-400 shadow-md ring-2 ring-sky-400/20' 
-                            : 'bg-linear-to-b from-white to-slate-50 border-slate-100 hover:border-sky-300 hover:shadow-md'
+                            ? 'bg-sky-50 dark:bg-sky-900/40 border-sky-400 shadow-md ring-2 ring-sky-400/20' 
+                            : 'bg-linear-to-b from-white to-slate-50 dark:from-slate-800 dark:to-slate-700/50 border-slate-100 dark:border-slate-700 hover:border-sky-300 hover:shadow-md'
                         }`}
                       >
-                        <div className={`text-xl font-black transition-colors leading-tight px-1 ${isSelected ? 'text-sky-700' : 'text-slate-800 group-hover:text-sky-600'}`}>
+                        <div className={`text-xl font-black transition-colors leading-tight px-1 ${isSelected ? 'text-sky-700 dark:text-sky-400' : 'text-slate-800 dark:text-slate-100 group-hover:text-sky-600 dark:group-hover:text-sky-400'}`}>
                           {word.meanings[0]}
                         </div>
-                        <div className={`text-xs font-bold mt-2 uppercase tracking-widest px-1 ${isSelected ? 'text-sky-500' : 'text-slate-400'}`}>
+                        <div className={`text-xs font-bold mt-2 uppercase tracking-widest px-1 ${isSelected ? 'text-sky-500 dark:text-sky-400' : 'text-slate-400 dark:text-slate-500'}`}>
                           {word.kanji}
                         </div>
                       </motion.div>

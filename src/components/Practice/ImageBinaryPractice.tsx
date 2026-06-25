@@ -84,12 +84,12 @@ export default function ImageBinaryPractice({ exercise, onComplete }: ImageBinar
   };
 
   return (
-    <div className="bg-white p-8 rounded-[2.5rem] border-2 border-slate-200 shadow-sm space-y-8 max-w-xl mx-auto">
+    <div className="bg-white dark:bg-slate-800 p-8 rounded-[2.5rem] border-2 border-slate-200 dark:border-slate-700 shadow-sm space-y-8 max-w-xl mx-auto">
       <div className="text-center space-y-4">
         <p className="text-slate-400 font-black uppercase text-xs tracking-widest">
           ¿La oración coincide con la imagen?
         </p>
-        <h2 className="text-3xl font-black text-slate-800 leading-tight">{exercise.japanese}</h2>
+        <h2 className="text-3xl font-black text-slate-800 dark:text-slate-100 leading-tight">{exercise.japanese}</h2>
       </div>
 
       <div className="">

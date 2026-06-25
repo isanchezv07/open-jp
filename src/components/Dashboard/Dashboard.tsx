@@ -59,9 +59,9 @@ export default function Dashboard() {
       {/* ... previous header and stats ... */}
       
       {/* Header Section */}
-      <div className="flex flex-col md:flex-row justify-between items-end gap-6 border-b-2 border-slate-100 pb-8">
+      <div className="flex flex-col md:flex-row justify-between items-end gap-6 border-b-2 border-slate-100 dark:border-slate-700 pb-8">
         <div>
-          <h1 className="text-4xl font-black text-slate-800 tracking-tight">¡Hola de nuevo! 👋</h1>
+          <h1 className="text-4xl font-black text-slate-800 dark:text-slate-100 tracking-tight">¡Hola de nuevo! 👋</h1>
           <p className="text-slate-400 font-bold text-lg">Continuemos con tu aprendizaje de japonés.</p>
         </div>
         <div className="flex gap-4">
@@ -76,27 +76,27 @@ export default function Dashboard() {
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div className="bg-white border-2 border-slate-200 p-8 rounded-[2.5rem] shadow-sm hover:shadow-md transition-shadow">
+        <div className="bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 p-8 rounded-[2.5rem] shadow-sm hover:shadow-md transition-shadow">
           <div className="bg-green-100 text-green-600 w-12 h-12 rounded-2xl flex items-center justify-center mb-4">
             <Trophy size={24} />
           </div>
-          <div className="text-3xl font-black text-slate-800">{learnedCount}</div>
+          <div className="text-3xl font-black text-slate-800 dark:text-slate-100">{learnedCount}</div>
           <div className="text-slate-400 font-bold uppercase text-xs tracking-widest">Aprendidas</div>
         </div>
 
-        <div className="bg-white border-2 border-slate-200 p-8 rounded-[2.5rem] shadow-sm hover:shadow-md transition-shadow">
+        <div className="bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 p-8 rounded-[2.5rem] shadow-sm hover:shadow-md transition-shadow">
           <div className="bg-sky-100 text-sky-600 w-12 h-12 rounded-2xl flex items-center justify-center mb-4">
             <BookOpen size={24} />
           </div>
-          <div className="text-3xl font-black text-slate-800">{dueCount}</div>
+          <div className="text-3xl font-black text-slate-800 dark:text-slate-100">{dueCount}</div>
           <div className="text-slate-400 font-bold uppercase text-xs tracking-widest">Pendientes</div>
         </div>
 
-        <div className="bg-white border-2 border-slate-200 p-8 rounded-[2.5rem] shadow-sm hover:shadow-md transition-shadow">
+        <div className="bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 p-8 rounded-[2.5rem] shadow-sm hover:shadow-md transition-shadow">
           <div className="bg-purple-100 text-purple-600 w-12 h-12 rounded-2xl flex items-center justify-center mb-4">
             <Star size={24} />
           </div>
-          <div className="text-3xl font-black text-slate-800">{Math.round((learnedCount / (totalCount || 1)) * 100)}%</div>
+          <div className="text-3xl font-black text-slate-800 dark:text-slate-100">{Math.round((learnedCount / (totalCount || 1)) * 100)}%</div>
           <div className="text-slate-400 font-bold uppercase text-xs tracking-widest">Progreso Total</div>
         </div>
       </div>
@@ -104,7 +104,7 @@ export default function Dashboard() {
       {/* Practice Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
         <div className="lg:col-span-2 space-y-6">
-          <h2 className="text-2xl font-black text-slate-800 tracking-tight flex items-center gap-3">
+          <h2 className="text-2xl font-black text-slate-800 dark:text-slate-100 tracking-tight flex items-center gap-3">
              <div className="w-2 h-8 bg-sky-500 rounded-full"></div>
              Unidades de Estudio
           </h2>
@@ -169,15 +169,15 @@ export default function Dashboard() {
 
         {/* Sidebar / Progress */}
         <div className="space-y-8">
-           <div className="bg-slate-50 border-2 border-slate-200 rounded-[2.5rem] p-8">
-              <h3 className="text-xl font-black text-slate-800 mb-6">Nivel JLPT N5</h3>
+           <div className="bg-slate-50 dark:bg-slate-700/50 border-2 border-slate-200 dark:border-slate-700 rounded-[2.5rem] p-8">
+              <h3 className="text-xl font-black text-slate-800 dark:text-slate-100 mb-6">Nivel JLPT N5</h3>
               <div className="space-y-6">
                  <div>
                     <div className="flex justify-between text-sm font-black text-slate-500 uppercase tracking-widest mb-2">
                        <span>Completado</span>
                        <span>{learnedCount}/{totalCount}</span>
                     </div>
-                    <div className="w-full bg-slate-200 h-6 rounded-full overflow-hidden border-2 border-slate-200">
+                    <div className="w-full bg-slate-200 dark:bg-slate-600 h-6 rounded-full overflow-hidden border-2 border-slate-200 dark:border-slate-700">
                        <motion.div 
                          initial={{ width: 0 }}
                          animate={{ width: `${(learnedCount / (totalCount || 1)) * 100}%` }}
@@ -192,16 +192,16 @@ export default function Dashboard() {
       </div>
 
       {/* Explorer Section */}
-      <div className="space-y-8 pt-12 border-t-2 border-slate-100">
+      <div className="space-y-8 pt-12 border-t-2 border-slate-100 dark:border-slate-700">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-          <h2 className="text-3xl font-black text-slate-800 tracking-tight flex items-center gap-3">
+          <h2 className="text-3xl font-black text-slate-800 dark:text-slate-100 tracking-tight flex items-center gap-3">
              <div className="w-2 h-10 bg-orange-500 rounded-full"></div>
              Explorar Vocabulario
           </h2>
           
           <div className="flex flex-wrap gap-2">
              <select 
-               className="bg-white border-2 border-slate-200 p-3 rounded-2xl font-bold text-slate-600 outline-none focus:border-orange-400"
+               className="bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 p-3 rounded-2xl font-bold text-slate-600 dark:text-slate-300 dark:text-slate-400 outline-none focus:border-orange-400"
                value={filter.jlpt}
                onChange={(e) => setFilter({...filter, jlpt: Number(e.target.value)})}
              >
@@ -210,7 +210,7 @@ export default function Dashboard() {
                <option value={4}>JLPT N4</option>
              </select>
              <select 
-               className="bg-white border-2 border-slate-200 p-3 rounded-2xl font-bold text-slate-600 outline-none focus:border-orange-400"
+               className="bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 p-3 rounded-2xl font-bold text-slate-600 dark:text-slate-300 dark:text-slate-400 outline-none focus:border-orange-400"
                value={filter.category}
                onChange={(e) => setFilter({...filter, category: e.target.value})}
              >
@@ -222,13 +222,13 @@ export default function Dashboard() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {words.map((word) => (
-            <div key={word.id} className="bg-white border-2 border-slate-200 p-6 rounded-3xl hover:border-orange-300 transition-all flex justify-between items-center group">
+            <div key={word.id} className="bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 p-6 rounded-3xl hover:border-orange-300 transition-all flex justify-between items-center group">
               <div>
-                <div className="text-2xl font-black text-slate-800">{word.kanji}</div>
+                <div className="text-2xl font-black text-slate-800 dark:text-slate-100">{word.kanji}</div>
                 <div className="text-slate-400 font-bold">{word.reading}</div>
                 <div className="text-orange-500 font-black text-xs uppercase tracking-tighter mt-1">{word.meanings[0]}</div>
               </div>
-              <div className="bg-slate-50 p-3 rounded-2xl group-hover:bg-orange-50 transition-colors">
+              <div className="bg-slate-50 dark:bg-slate-700/50 p-3 rounded-2xl group-hover:bg-orange-50 transition-colors">
                 <Star size={20} className="text-slate-200 group-hover:text-orange-400" />
               </div>
             </div>

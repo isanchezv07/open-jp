@@ -44,12 +44,11 @@ const itemVariants = {
 export default function Curriculum() {
   return (
     <div className="max-w-6xl mx-auto px-6 py-12 space-y-16">
-      {/* Hero Header */}
-      <motion.div 
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="relative overflow-hidden bg-linear-to-br from-sky-50 via-white to-indigo-50 rounded-[3.5rem] p-12 border-2 border-slate-100 shadow-xl shadow-sky-100/20"
-      >
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="relative overflow-hidden bg-linear-to-br from-sky-50 via-white to-indigo-50 dark:from-slate-800 dark:via-slate-900 dark:to-slate-800 rounded-[3.5rem] p-12 border-2 border-slate-100 dark:border-slate-700 shadow-xl shadow-sky-100/20 dark:shadow-none"
+        >
         <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-96 h-96 bg-sky-200/30 rounded-full blur-[100px]"></div>
         <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/4 w-96 h-96 bg-purple-200/30 rounded-full blur-[100px]"></div>
         
@@ -58,7 +57,7 @@ export default function Curriculum() {
                 <div className="inline-flex items-center gap-2 bg-sky-500/10 border border-sky-500/20 px-4 py-1.5 rounded-full text-sky-600 text-sm font-black uppercase tracking-widest">
                     <Zap size={14} fill="currentColor" /> Ruta de Aprendizaje
                 </div>
-                <h1 className="text-5xl md:text-6xl font-black tracking-tight leading-none text-slate-800">
+                <h1 className="text-5xl md:text-6xl font-black tracking-tight leading-none text-slate-800 dark:text-slate-100">
                     Domina el <span className="text-transparent bg-clip-text bg-linear-to-r from-sky-500 to-indigo-500">Japonés</span>
                 </h1>
                 <p className="text-slate-500 font-bold text-xl max-w-xl">
@@ -66,11 +65,11 @@ export default function Curriculum() {
                 </p>
             </div>
             <div className="flex gap-4">
-                <div className="bg-white border-2 border-slate-100 p-6 rounded-[2.5rem] text-center shadow-sm">
-                    <div className="text-3xl font-black text-slate-800">9</div>
+                <div className="bg-white dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 p-6 rounded-[2.5rem] text-center shadow-sm">
+                    <div className="text-3xl font-black text-slate-800 dark:text-slate-100">9</div>
                     <div className="text-xs font-black text-slate-400 uppercase tracking-widest">Unidades</div>
                 </div>
-                <div className="bg-white border-2 border-slate-100 p-6 rounded-[2.5rem] text-center shadow-sm text-amber-400">
+                <div className="bg-white dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 p-6 rounded-[2.5rem] text-center shadow-sm text-amber-400">
                     <Star size={32} fill="currentColor" className="mx-auto mb-1" />
                     <div className="text-xs font-black uppercase tracking-widest text-slate-400">Nivel N5</div>
                 </div>
@@ -96,7 +95,7 @@ export default function Curriculum() {
                 transition: { type: 'spring', stiffness: 400, damping: 10 }
               }}
               whileTap={{ scale: 0.96 }}
-              className="group relative bg-white border-2 border-slate-100 p-8 rounded-[3rem] shadow-sm hover:shadow-xl hover:border-transparent transition-all duration-300 overflow-hidden"
+              className="group relative bg-white dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 p-8 rounded-[3rem] shadow-sm hover:shadow-xl hover:border-transparent transition-all duration-300 overflow-hidden"
             >
               {/* Animated Background Gradient */}
               <div 
@@ -113,7 +112,7 @@ export default function Curriculum() {
                 </div>
                 
                 <div className="flex-1 space-y-2">
-                  <h3 className="text-2xl font-black text-slate-800 group-hover:text-slate-900">
+                  <h3 className="text-2xl font-black text-slate-800 dark:text-slate-100 group-hover:text-slate-900">
                     {u.title}
                   </h3>
                   <p className="text-slate-400 font-bold text-sm leading-relaxed group-hover:text-slate-500 transition-colors">
@@ -122,7 +121,7 @@ export default function Curriculum() {
                 </div>
 
                 <div className="mt-8 pt-6 border-t border-slate-50 flex items-center justify-between">
-                    <span className="text-xs font-black uppercase tracking-[0.2em] text-slate-300 group-hover:text-slate-500 transition-colors">
+                    <span className="text-xs font-black uppercase tracking-[0.2em] text-slate-300 dark:text-slate-400 group-hover:text-slate-500 transition-colors">
                         Explorar Unidad
                     </span>
                     <div 

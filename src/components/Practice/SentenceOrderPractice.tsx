@@ -80,12 +80,12 @@ export default function SentenceOrderPractice({ exercise, mode = 'es-ja', onComp
   };
 
   return (
-    <div className="bg-white p-8 rounded-[2.5rem] border-2 border-slate-200 shadow-sm space-y-8">
+    <div className="bg-white dark:bg-slate-800 p-8 rounded-[2.5rem] border-2 border-slate-200 dark:border-slate-700 shadow-sm space-y-8">
       <div className="text-center space-y-4">
         <p className="text-slate-400 font-black uppercase text-xs tracking-widest">
           {isJaEs ? 'Ordena la traducción:' : 'Forma la oración en japonés:'}
         </p>
-        <h2 className="text-3xl font-black text-slate-800 leading-tight">{prompt}</h2>
+        <h2 className="text-3xl font-black text-slate-800 dark:text-slate-100 leading-tight">{prompt}</h2>
       </div>
 
       <div className="relative">
@@ -105,7 +105,7 @@ export default function SentenceOrderPractice({ exercise, mode = 'es-ja', onComp
         )}
       </div>
 
-      <div className="min-h-24 bg-slate-50 border-2 border-dashed border-slate-200 rounded-4xl p-6 flex flex-wrap gap-3 justify-center items-center">
+      <div className="min-h-24 bg-slate-50 dark:bg-slate-700/50 border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-4xl p-6 flex flex-wrap gap-3 justify-center items-center">
         <AnimatePresence>
           {selectedWords.map((word, index) => (
             <motion.button
@@ -134,7 +134,7 @@ export default function SentenceOrderPractice({ exercise, mode = 'es-ja', onComp
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => handleWordClick(word, index)}
-            className="px-5 py-3 bg-white border-2 border-slate-200 rounded-2xl font-black text-slate-700 hover:border-sky-300 transition-all shadow-sm"
+            className="px-5 py-3 bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-2xl font-black text-slate-700 dark:text-slate-200 hover:border-sky-300 transition-all shadow-sm"
           >
             {word}
           </motion.button>
@@ -144,7 +144,7 @@ export default function SentenceOrderPractice({ exercise, mode = 'es-ja', onComp
       <div className="flex gap-3 pt-4">
         <button
           onClick={resetSelection}
-          className="p-5 bg-slate-100 text-slate-600 rounded-2xl hover:bg-slate-200 transition-colors"
+          className="p-5 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 dark:text-slate-400 rounded-2xl hover:bg-slate-200 dark:bg-slate-600 transition-colors"
         >
           <RefreshCw size={24} />
         </button>
