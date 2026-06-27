@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { db, type Word, type Progress } from '../../lib/db/index';
-import { validateAnswer, calculateNextReview } from '../../lib/services/srs';
+import { db, type Word, type Progress } from '@/lib/db/index';
+import { validateAnswer, calculateNextReview } from '@/lib/services/srs';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, X, Volume2, ArrowRight, Home, RefreshCw, Star } from 'lucide-react';
-import { performanceMessages } from '../../lib/constants/messages';
+import { performanceMessages } from '@/lib/constants/messages';
 import CompletionCelebration from '../Common/CompletionCelebration';
 
 interface PracticeSessionProps {

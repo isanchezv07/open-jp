@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, X, RefreshCw, Loader2 } from 'lucide-react';
-import type { SentenceExercise } from '../../lib/types/index';
+import type { SentenceExercise } from '@/lib/types/index';
 
 interface SentenceOrderPracticeProps {
   exercise: SentenceExercise;

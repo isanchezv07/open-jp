@@ -1,13 +1,20 @@
-import { useMemo, useState } from 'react';
-import { lessons as allLessons, words as allWords } from '../../lib/data/index';
+import { useMemo, useState, useEffect } from 'react';
+import { lessons as allLessons, words as allWords } from '@/lib/data/index';
 import { BookOpen, ArrowLeft, Play, Trophy, Star } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 
 interface UnitDetailProps {
   unitId: string;
 }
 
 export default function UnitDetail({ unitId }: UnitDetailProps) {
+  const [lang, setLang] = useState<'es' | 'en'>('es');
+  useEffect(() => {
+    setLang(getLangFromUrl(new URL(window.location.href)));
+  }, []);
+  const t = useTranslations(lang);
+
   const [questionLimit, setQuestionLimit] = useState(10);
 
   const [selectedItems, setSelectedItems] = useState<Set<number>>(new Set());
@@ -61,16 +68,16 @@ export default function UnitDetail({ unitId }: UnitDetailProps) {
 
             <div className="flex-1">
               <h1 className="text-4xl font-black text-slate-800 dark:text-slate-100 tracking-tight">
-                Unidad: {unitId}
+                {t('unit_detail.unit')} {unitId}
               </h1>
               <p className="text-slate-400 font-bold mt-1">
-                {stats.total} palabras en esta unidad. Selecciona las que desees para practicar.
+                {stats.total} {t('unit_detail.words_in_unit')}
               </p>
             </div>
 
             <div className="bg-slate-50 dark:bg-slate-700/50 rounded-2xl border-2 border-slate-200 dark:border-slate-700 p-4">
               <label className="block text-xs uppercase tracking-widest font-black text-slate-400 mb-2">
-                Nº Preguntas
+                {t('unit_detail.question_limit')}
               </label>
               <input
                 type="number"
@@ -91,7 +98,7 @@ export default function UnitDetail({ unitId }: UnitDetailProps) {
             </div>
             <div>
               <div className="text-3xl font-black text-slate-800 dark:text-slate-100">{stats.total}</div>
-              <div className="text-slate-400 font-bold uppercase text-xs tracking-widest">Palabras totales</div>
+              <div className="text-slate-400 font-bold uppercase text-xs tracking-widest">{t('unit_detail.total_words')}</div>
             </div>
           </div>
           <div className="bg-white dark:bg-slate-800 rounded-[2.5rem] p-8 border-2 border-slate-200 dark:border-slate-700 shadow-sm flex items-center gap-6">
@@ -100,7 +107,7 @@ export default function UnitDetail({ unitId }: UnitDetailProps) {
             </div>
             <div>
               <div className="text-3xl font-black text-slate-800 dark:text-slate-100">{unitLessons.length}</div>
-              <div className="text-slate-400 font-bold uppercase text-xs tracking-widest">Lecciones</div>
+              <div className="text-slate-400 font-bold uppercase text-xs tracking-widest">{t('unit_detail.lessons')}</div>
             </div>
           </div>
         </div>
@@ -127,23 +134,23 @@ export default function UnitDetail({ unitId }: UnitDetailProps) {
                   </h2>
                   {selectedInLesson.length > 0 && (
                     <span className="bg-sky-100 text-sky-600 px-4 py-1 rounded-full text-sm font-black">
-                      {selectedInLesson.length} seleccionadas
+                      {selectedInLesson.length} {t('unit_detail.selected')}
                     </span>
                   )}
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-6 mb-10">
                   <a
-                    href={`/practice/${unitId === 'Escucha' ? 'audio' : 'ja-es'}?lessonId=${lesson.id}&limit=${questionLimit}${queryIds}`}
+                    href={`/${lang}/practice/${unitId === 'Escucha' ? 'audio' : 'ja-es'}?lessonId=${lesson.id}&limit=${questionLimit}${queryIds}`}
                     className="group bg-slate-50 dark:bg-slate-700/50 hover:bg-white dark:hover:bg-slate-800 dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 hover:border-sky-400 rounded-4xl p-6 flex justify-between items-center transition-all btn-3d"
                     style={{ '--border-color': 'var(--duo-blue-border)' } as any}
                   >
                     <div className="text-left">
                       <h3 className="text-xl font-black text-slate-800 dark:text-slate-100">
-                        {unitId === 'Escucha' ? 'Práctica Escucha' : 'Práctica Lectura'}
+                        {unitId === 'Escucha' ? t('unit_detail.practice_listening') : t('unit_detail.practice_reading')}
                       </h3>
                       <p className="text-slate-400 font-bold text-sm">
-                        {unitId === 'Escucha' ? 'Escucha → Japonés' : 'Kanji/Kana → Español'}
+                        {unitId === 'Escucha' ? t('unit_detail.listening_to_japanese') : t('unit_detail.reading_to_spanish')}
                       </p>
                     </div>
                     <div className="w-14 h-14 rounded-2xl bg-sky-100 text-sky-600 flex items-center justify-center group-hover:bg-sky-500 group-hover:text-white transition-all">
@@ -152,13 +159,13 @@ export default function UnitDetail({ unitId }: UnitDetailProps) {
                   </a>
 
                   <a
-                    href={`/practice/es-ja?lessonId=${lesson.id}&limit=${questionLimit}${queryIds}`}
+                    href={`/${lang}/practice/es-ja?lessonId=${lesson.id}&limit=${questionLimit}${queryIds}`}
                     className="group bg-slate-50 dark:bg-slate-700/50 hover:bg-white dark:hover:bg-slate-800 dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 hover:border-green-400 rounded-4xl p-6 flex justify-between items-center transition-all btn-3d"
                     style={{ '--border-color': 'var(--duo-green-border)' } as any}
                   >
                     <div className="text-left">
-                      <h3 className="text-xl font-black text-slate-800 dark:text-slate-100">Práctica Escritura</h3>
-                      <p className="text-slate-400 font-bold text-sm">Español → Japonés</p>
+                      <h3 className="text-xl font-black text-slate-800 dark:text-slate-100">{t('unit_detail.practice_writing')}</h3>
+                      <p className="text-slate-400 font-bold text-sm">{t('unit_detail.writing_to_japanese')}</p>
                     </div>
                     <div className="w-14 h-14 rounded-2xl bg-green-100 text-green-600 flex items-center justify-center group-hover:bg-green-500 group-hover:text-white transition-all">
                       <BookOpen size={24} />

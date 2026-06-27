@@ -1,0 +1,29 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import UnitDetail from '@/components/Dashboard/UnitDetail';
+import SentencesDetail from '@/components/Dashboard/SentencesDetail';
+
+export function getStaticPaths() {
+  const locales = ['es', 'en'];
+  const units = ['Hiragana', 'Katakana', 'Kanji', 'Vocabulario', 'Verbos', 'Números', 'Tiempo', 'Oraciones', 'Escucha'];
+  const paths = [];
+  for (const locale of locales) {
+    for (const unit of units) {
+      paths.push({ params: { locale, unit } });
+    }
+  }
+  return paths;
+}
+
+const { unit } = Astro.params;
+---
+
+<Layout title={`Unidad: ${unit}`}>
+  <main class="py-8">
+    {unit === 'Oraciones' ? (
+      <SentencesDetail client:only="react" />
+    ) : (
+      <UnitDetail unitId={unit} client:only="react" />
+    )}
+  </main>
+</Layout>

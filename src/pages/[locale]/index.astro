@@ -1,0 +1,21 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Curriculum from '@/components/Dashboard/Curriculum';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+export function getStaticPaths() {
+  return [
+    { params: { locale: 'es' } },
+    { params: { locale: 'en' } }
+  ];
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<Layout title={t('site.title')}>
+	<main class="py-8">
+		<Curriculum client:load />
+	</main>
+</Layout>

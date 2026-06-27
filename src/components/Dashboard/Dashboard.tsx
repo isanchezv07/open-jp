@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { db, type Word, type Progress, type UserStats } from '../../lib/db/index';
+import { db, type Word, type Progress, type UserStats } from '@/lib/db/index';
 import { Trophy, Flame, BookOpen, Star, ChevronRight, Volume2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 

@@ -1,7 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
-
+import path from 'node:path';
 import tailwindcss from '@tailwindcss/vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
@@ -48,7 +48,12 @@ export default defineConfig({
           navigateFallbackAllowlist: [/^\//]
         }
       })
-    ]
+    ],
+    resolve: {
+      alias: {
+        '@': path.resolve('./src'),
+      },
+    },
   },
 
   devToolbar: {

@@ -15,11 +15,11 @@ export interface Word {
   unit: string;
   lessonId: number;
   jlpt: number;
-  image_url?: string;
+  /*image_url?: string;
   keyWord: string;
   audio_url?: string;
   example_ja?: string;
-  example_es?: string;
+  example_es?: string;*/
 }
 
 export interface SentenceExercise {

@@ -1,13 +1,20 @@
 import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, Play, BookOpen, MessageCircle, Star, X, Trophy, Home, RefreshCw } from 'lucide-react';
-import { sentenceExercises } from '../../lib/data/sentences';
+import { sentenceExercises } from '@/lib/data/sentences';
 import SentenceOrderPractice from '../Practice/SentenceOrderPractice';
 import ImageBinaryPractice from '../Practice/ImageBinaryPractice';
-import { performanceMessages } from '../../lib/constants/messages';
+import { performanceMessages } from '@/lib/constants/messages';
 import CompletionCelebration from '../Common/CompletionCelebration';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 
 export default function SentencesDetail() {
+  const [lang, setLang] = useState<'es' | 'en'>('es');
+  useEffect(() => {
+    setLang(getLangFromUrl(new URL(window.location.href)));
+  }, []);
+  const t = useTranslations(lang);
+
   const [activePractice, setActivePractice] = useState<{ mode: 'ja-es' | 'es-ja', category: string } | null>(null);
   const [questionLimit, setQuestionLimit] = useState(5);
   
@@ -93,7 +100,7 @@ export default function SentencesDetail() {
     }
 
     const currentExercise = practiceSet[currentIndex];
-    if (!currentExercise) return <div className="text-center py-20 font-black text-slate-400">Cargando...</div>;
+    if (!currentExercise) return <div className="text-center py-20 font-black text-slate-400">{t('sentences_detail.loading')}</div>;
 
     return (
       <div className="max-w-2xl mx-auto px-6 py-8 min-h-screen">
@@ -155,11 +162,11 @@ export default function SentencesDetail() {
           <div className="flex flex-col lg:flex-row gap-8 lg:items-center">
             <a href="/" className="w-16 h-16 rounded-3xl bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:bg-slate-600 flex items-center justify-center transition-all text-slate-500"><ArrowLeft size={28} /></a>
             <div className="flex-1">
-              <h1 className="text-4xl font-black text-slate-800 dark:text-slate-100 tracking-tight">Unidad: Oraciones</h1>
-              <p className="text-slate-400 font-bold mt-1">Selecciona las oraciones que desees practicar o practica con todas.</p>
+              <h1 className="text-4xl font-black text-slate-800 dark:text-slate-100 tracking-tight">{t('sentences_detail.unit')}</h1>
+              <p className="text-slate-400 font-bold mt-1">{t('sentences_detail.description')}</p>
             </div>
             <div className="bg-slate-50 dark:bg-slate-700/50 rounded-2xl border-2 border-slate-200 dark:border-slate-700 p-4">
-              <label className="block text-xs uppercase tracking-widest font-black text-slate-400 mb-2">Nº Preguntas</label>
+              <label className="block text-xs uppercase tracking-widest font-black text-slate-400 mb-2">{t('sentences_detail.question_limit')}</label>
               <input type="number" min="1" value={questionLimit} onChange={(e) => setQuestionLimit(Math.max(1, parseInt(e.target.value) || 1))} className="w-24 rounded-xl border-2 border-slate-200 dark:border-slate-700 p-2 text-center font-black text-slate-700 dark:text-slate-200 outline-none focus:border-sky-500" />
             </div>
           </div>
@@ -175,28 +182,28 @@ export default function SentencesDetail() {
                 <div className="flex items-center gap-4 mb-8">
                   <div className="w-2 h-10 rounded-full bg-teal-500" />
                   <h2 className="text-3xl font-black text-slate-800 dark:text-slate-100">{cat.name}</h2>
-                  <span className="bg-slate-100 dark:bg-slate-700 text-slate-500 px-4 py-1 rounded-full text-sm font-black">{cat.exercises.length} ejercicios</span>
+                  <span className="bg-slate-100 dark:bg-slate-700 text-slate-500 px-4 py-1 rounded-full text-sm font-black">{cat.exercises.length} {t('sentences_detail.exercises')}</span>
                   {selectedInCategory.length > 0 && (
                     <span className="bg-teal-100 text-teal-600 px-4 py-1 rounded-full text-sm font-black">
-                      {selectedInCategory.length} seleccionadas
+                      {selectedInCategory.length} {t('sentences_detail.selected')}
                     </span>
                   )}
                 </div>
                 {isImageBinary ? (
                   <div className="grid grid-cols-1 gap-6 mb-8">
                     <button onClick={() => startPractice('ja-es', cat.name)} className="group bg-slate-50 dark:bg-slate-700/50 hover:bg-white dark:hover:bg-slate-800 dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 hover:border-purple-400 rounded-4xl p-6 flex justify-between items-center transition-all btn-3d" style={{ '--border-color': '#a855f7' } as any}>
-                      <div className="text-left"><h3 className="text-xl font-black text-slate-800 dark:text-slate-100">Verificación Visual</h3><p className="text-slate-400 font-bold text-sm">Determina si la oración coincide con la imagen</p></div>
+                      <div className="text-left"><h3 className="text-xl font-black text-slate-800 dark:text-slate-100">{t('sentences_detail.visual_verification')}</h3><p className="text-slate-400 font-bold text-sm">{t('sentences_detail.visual_desc')}</p></div>
                       <div className="w-14 h-14 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center group-hover:bg-purple-500 group-hover:text-white transition-all"><Star fill="currentColor" size={24} /></div>
                     </button>
                   </div>
                 ) : (
                   <div className="grid md:grid-cols-2 gap-6 mb-8">
                     <button onClick={() => startPractice('ja-es', cat.name)} className="group bg-slate-50 dark:bg-slate-700/50 hover:bg-white dark:hover:bg-slate-800 dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 hover:border-sky-400 rounded-4xl p-6 flex justify-between items-center transition-all btn-3d" style={{ '--border-color': 'var(--duo-blue-border)' } as any}>
-                      <div className="text-left"><h3 className="text-xl font-black text-slate-800 dark:text-slate-100">Lectura</h3><p className="text-slate-400 font-bold text-sm">Japonés → Español</p></div>
+                      <div className="text-left"><h3 className="text-xl font-black text-slate-800 dark:text-slate-100">{t('sentences_detail.reading')}</h3><p className="text-slate-400 font-bold text-sm">{t('sentences_detail.reading_desc')}</p></div>
                       <div className="w-14 h-14 rounded-2xl bg-sky-100 text-sky-600 flex items-center justify-center group-hover:bg-sky-500 group-hover:text-white transition-all"><Play fill="currentColor" size={24} /></div>
                     </button>
                     <button onClick={() => startPractice('es-ja', cat.name)} className="group bg-slate-50 dark:bg-slate-700/50 hover:bg-white dark:hover:bg-slate-800 dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 hover:border-green-400 rounded-4xl p-6 flex justify-between items-center transition-all btn-3d" style={{ '--border-color': 'var(--duo-green-border)' } as any}>
-                      <div className="text-left"><h3 className="text-xl font-black text-slate-800 dark:text-slate-100">Escritura</h3><p className="text-slate-400 font-bold text-sm">Español → Japonés</p></div>
+                      <div className="text-left"><h3 className="text-xl font-black text-slate-800 dark:text-slate-100">{t('sentences_detail.writing')}</h3><p className="text-slate-400 font-bold text-sm">{t('sentences_detail.writing_desc')}</p></div>
                       <div className="w-14 h-14 rounded-2xl bg-green-100 text-green-600 flex items-center justify-center group-hover:bg-green-500 group-hover:text-white transition-all"><BookOpen size={24} /></div>
                     </button>
                   </div>

@@ -1,0 +1,84 @@
+{
+    "site": {
+        "description": "Improve your Japanese skills and perfect your vocabulary.",
+        "title": "Japanese Vocab - Learning Path"
+    },
+    "nav": {
+        "title": "open-jp"
+    },
+    "curriculum": {
+        "badge": "Learning Path",
+        "title_prefix": "Master ",
+        "title_highlight": "Japanese",
+        "subtitle": "A structured journey from basic alphabets to understanding complex sentences.",
+        "units_label": "Units",
+        "level_label": "N5 Level",
+        "explore": "Explore Unit"
+    },
+    "units": {
+        "hiragana": {
+            "title": "Hiragana Alphabet",
+            "description": "The foundation of Japanese writing."
+        },
+        "katakana": {
+            "title": "Katakana Alphabet",
+            "description": "For foreign words and emphasis."
+        },
+        "kanji": {
+            "title": "N5 Kanji",
+            "description": "Fundamental ideograms."
+        },
+        "vocab": {
+            "title": "Vocabulary",
+            "description": "Essential daily words."
+        },
+        "verbos": {
+            "title": "Verbs",
+            "description": "Basic actions and states."
+        },
+        "numeros": {
+            "title": "Numbers",
+            "description": "Counting and measurements."
+        },
+        "tiempo": {
+            "title": "Dates & Time",
+            "description": "Days, months and clocks."
+        },
+        "sentences": {
+            "title": "Sentences",
+            "description": "Grammar structure and order."
+        },
+        "escucha": {
+            "title": "Listening",
+            "description": "Auditory training."
+        }
+    },
+    "unit_detail": {
+        "unit": "Unit:",
+        "words_in_unit": "words in this unit. Select the ones you want to practice.",
+        "question_limit": "No. of Questions",
+        "total_words": "Total words",
+        "lessons": "Lessons",
+        "selected": "selected",
+        "practice_listening": "Listening Practice",
+        "listening_to_japanese": "Listening → Japanese",
+        "practice_reading": "Reading Practice",
+        "reading_to_spanish": "Kanji/Kana → English",
+        "practice_writing": "Writing Practice",
+        "writing_to_japanese": "English → Japanese"
+    },
+    "sentences_detail": {
+        "loading": "Loading...",
+        "unit": "Unit: Sentences",
+        "description": "Select the sentences you want to practice or practice with all of them.",
+        "question_limit": "No. of Questions",
+        "exercises": "exercises",
+        "selected": "selected",
+        "visual_verification": "Visual Verification",
+        "visual_desc": "Determine if the sentence matches the image",
+        "reading": "Reading",
+        "reading_desc": "Japanese → English",
+        "writing": "Writing",
+        "writing_desc": "English → Japanese"
+    }
+}

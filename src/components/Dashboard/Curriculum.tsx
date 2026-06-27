@@ -1,21 +1,22 @@
 import { useEffect, useState } from 'react';
-import { db } from '../../lib/db/index';
+import { db } from '@/lib/db/index';
 import { 
   Book, Type, Feather, Layers, Languages, Hash, Calendar, 
   MessageCircle, Headphones, PieChart, ChevronRight, Star, Zap
 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 
-const UNITS = [
-  { id: 'hiragana', title: 'Alfabeto Hiragana', icon: Type, color: '#0ea5e9', unit: 'Hiragana', description: 'Las bases de la escritura japonesa.' },
-  { id: 'katakana', title: 'Alfabeto Katakana', icon: Feather, color: '#ec4899', unit: 'Katakana', description: 'Para palabras extranjeras y énfasis.' },
-  { id: 'kanji', title: 'Kanji N5', icon: Layers, color: '#a855f7', unit: 'Kanji', description: 'Ideogramas fundamentales.' },
-  { id: 'vocab', title: 'Vocabulario', icon: Book, color: '#22c55e', unit: 'Vocabulario', description: 'Palabras cotidianas esenciales.' },
-  { id: 'verbos', title: 'Verbos', icon: Languages, color: '#f97316', unit: 'Verbos', description: 'Acciones y estados básicos.' },
-  { id: 'numeros', title: 'Números', icon: Hash, color: '#eab308', unit: 'Números', description: 'Contar y medidas.' },
-  { id: 'tiempo', title: 'Fechas y Horas', icon: Calendar, color: '#ef4444', unit: 'Tiempo', description: 'Días, meses y relojes.' },
-  { id: 'sentences', title: 'Oraciones', icon: MessageCircle, color: '#14b8a6', unit: 'Oraciones', description: 'Estructura gramatical y orden.' },
-  { id: 'escucha', title: 'Escucha', icon: Headphones, color: '#6366f1', unit: 'Escucha', description: 'Entrenamiento auditivo.' },
+const UNITS_CONFIG = [
+  { id: 'hiragana', icon: Type, color: '#0ea5e9', unit: 'Hiragana' },
+  { id: 'katakana', icon: Feather, color: '#ec4899', unit: 'Katakana' },
+  { id: 'kanji', icon: Layers, color: '#a855f7', unit: 'Kanji' },
+  { id: 'vocab', icon: Book, color: '#22c55e', unit: 'Vocabulario' },
+  { id: 'verbos', icon: Languages, color: '#f97316', unit: 'Verbos' },
+  { id: 'numeros', icon: Hash, color: '#eab308', unit: 'Números' },
+  { id: 'tiempo', icon: Calendar, color: '#ef4444', unit: 'Tiempo' },
+  { id: 'sentences', icon: MessageCircle, color: '#14b8a6', unit: 'Oraciones' },
+  { id: 'escucha', icon: Headphones, color: '#6366f1', unit: 'Escucha' },
 ];
 
 const containerVariants = {
@@ -42,6 +43,9 @@ const itemVariants = {
 };
 
 export default function Curriculum() {
+  const lang = typeof window !== 'undefined' ? getLangFromUrl(new URL(window.location.href)) : 'es';
+  const t = useTranslations(lang);
+
   return (
     <div className="max-w-6xl mx-auto px-6 py-12 space-y-16">
         <motion.div
@@ -55,23 +59,23 @@ export default function Curriculum() {
         <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-8">
             <div className="text-center md:text-left space-y-4">
                 <div className="inline-flex items-center gap-2 bg-sky-500/10 border border-sky-500/20 px-4 py-1.5 rounded-full text-sky-600 text-sm font-black uppercase tracking-widest">
-                    <Zap size={14} fill="currentColor" /> Ruta de Aprendizaje
+                    <Zap size={14} fill="currentColor" /> {t('curriculum.badge')}
                 </div>
                 <h1 className="text-5xl md:text-6xl font-black tracking-tight leading-none text-slate-800 dark:text-slate-100">
-                    Domina el <span className="text-transparent bg-clip-text bg-linear-to-r from-sky-500 to-indigo-500">Japonés</span>
+                    {t('curriculum.title_prefix')}<span className="text-transparent bg-clip-text bg-linear-to-r from-sky-500 to-indigo-500">{t('curriculum.title_highlight')}</span>
                 </h1>
                 <p className="text-slate-500 font-bold text-xl max-w-xl">
-                    Un viaje estructurado desde los alfabetos básicos hasta la comprensión de oraciones complejas.
+                    {t('curriculum.subtitle')}
                 </p>
             </div>
             <div className="flex gap-4">
                 <div className="bg-white dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 p-6 rounded-[2.5rem] text-center shadow-sm">
                     <div className="text-3xl font-black text-slate-800 dark:text-slate-100">9</div>
-                    <div className="text-xs font-black text-slate-400 uppercase tracking-widest">Unidades</div>
+                    <div className="text-xs font-black text-slate-400 uppercase tracking-widest">{t('curriculum.units_label')}</div>
                 </div>
                 <div className="bg-white dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 p-6 rounded-[2.5rem] text-center shadow-sm text-amber-400">
                     <Star size={32} fill="currentColor" className="mx-auto mb-1" />
-                    <div className="text-xs font-black uppercase tracking-widest text-slate-400">Nivel N5</div>
+                    <div className="text-xs font-black uppercase tracking-widest text-slate-400">{t('curriculum.level_label')}</div>
                 </div>
             </div>
         </div>
@@ -84,11 +88,11 @@ export default function Curriculum() {
         animate="visible"
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
       >
-        {UNITS.map((u) => {
+        {UNITS_CONFIG.map((u) => {
           return (
             <motion.a 
               key={u.id} 
-              href={`/unit/${u.unit}`}
+              href={`/${lang}/unit/${u.unit}`}
               variants={itemVariants}
               whileHover={{ 
                 y: -10,
@@ -113,16 +117,16 @@ export default function Curriculum() {
                 
                 <div className="flex-1 space-y-2">
                   <h3 className="text-2xl font-black text-slate-800 dark:text-slate-100 group-hover:text-slate-900">
-                    {u.title}
+                    {t(`units.${u.id}.title`)}
                   </h3>
                   <p className="text-slate-400 font-bold text-sm leading-relaxed group-hover:text-slate-500 transition-colors">
-                    {u.description}
+                    {t(`units.${u.id}.description`)}
                   </p>
                 </div>
 
                 <div className="mt-8 pt-6 border-t border-slate-50 flex items-center justify-between">
                     <span className="text-xs font-black uppercase tracking-[0.2em] text-slate-300 dark:text-slate-400 group-hover:text-slate-500 transition-colors">
-                        Explorar Unidad
+                        {t('curriculum.explore')}
                     </span>
                     <div 
                         className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 group-hover:translate-x-2"

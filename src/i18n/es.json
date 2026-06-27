@@ -1,0 +1,84 @@
+{
+    "site": {
+        "description": "Imporve your FTC skills and perfect your portafolio con BrainBox by CAN Queens",
+        "title": "Japanese Vocab - Ruta de Aprendizaje"
+    },
+    "nav": {
+        "title": "open-jp"
+    },
+    "curriculum": {
+        "badge": "Ruta de Aprendizaje",
+        "title_prefix": "Domina el ",
+        "title_highlight": "Japonés",
+        "subtitle": "Un viaje estructurado desde los alfabetos básicos hasta la comprensión de oraciones complejas.",
+        "units_label": "Unidades",
+        "level_label": "Nivel N5",
+        "explore": "Explorar Unidad"
+    },
+    "units": {
+        "hiragana": {
+            "title": "Alfabeto Hiragana",
+            "description": "Las bases de la escritura japonesa."
+        },
+        "katakana": {
+            "title": "Alfabeto Katakana",
+            "description": "Para palabras extranjeras y énfasis."
+        },
+        "kanji": {
+            "title": "Kanji N5",
+            "description": "Ideogramas fundamentales."
+        },
+        "vocab": {
+            "title": "Vocabulario",
+            "description": "Palabras cotidianas esenciales."
+        },
+        "verbos": {
+            "title": "Verbos",
+            "description": "Acciones y estados básicos."
+        },
+        "numeros": {
+            "title": "Números",
+            "description": "Contar y medidas."
+        },
+        "tiempo": {
+            "title": "Fechas y Horas",
+            "description": "Días, meses y relojes."
+        },
+        "sentences": {
+            "title": "Oraciones",
+            "description": "Estructura gramatical y orden."
+        },
+        "escucha": {
+            "title": "Escucha",
+            "description": "Entrenamiento auditivo."
+        }
+    },
+    "unit_detail": {
+        "unit": "Unidad:",
+        "words_in_unit": "palabras en esta unidad. Selecciona las que desees para practicar.",
+        "question_limit": "Nº Preguntas",
+        "total_words": "Palabras totales",
+        "lessons": "Lecciones",
+        "selected": "seleccionadas",
+        "practice_listening": "Práctica Escucha",
+        "listening_to_japanese": "Escucha → Japonés",
+        "practice_reading": "Práctica Lectura",
+        "reading_to_spanish": "Kanji/Kana → Español",
+        "practice_writing": "Práctica Escritura",
+        "writing_to_japanese": "Español → Japonés"
+    },
+    "sentences_detail": {
+        "loading": "Cargando...",
+        "unit": "Unidad: Oraciones",
+        "description": "Selecciona las oraciones que desees practicar o practica con todas.",
+        "question_limit": "Nº Preguntas",
+        "exercises": "ejercicios",
+        "selected": "seleccionadas",
+        "visual_verification": "Verificación Visual",
+        "visual_desc": "Determina si la oración coincide con la imagen",
+        "reading": "Lectura",
+        "reading_desc": "Japonés → Español",
+        "writing": "Escritura",
+        "writing_desc": "Español → Japonés"
+    }
+}

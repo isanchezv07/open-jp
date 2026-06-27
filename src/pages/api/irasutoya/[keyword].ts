@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { sentenceExercises } from '../../../lib/data/sentences';
+import { sentenceExercises } from '@/lib/data/sentences';
 
 export async function getStaticPaths() {
     const keywords = new Set<string>();
